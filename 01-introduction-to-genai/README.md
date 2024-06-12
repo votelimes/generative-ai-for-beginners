@@ -2,9 +2,9 @@
 
 [![Introduction to Generative AI and Large Language Models](./images/01-lesson-banner.png?WT.mc_id=academic-105485-koreyst)](https://learn.microsoft.com/_themes/docs.theme/master/en-us/_themes/global/video-embed.html?id=36c6795a-e63c-46dd-8d69-df8bbe6e7bc9?WT.mc_id=academic-105485-koreyst)
 
-*(Click the image above to view video of this lesson)*
+*(Нажмите на изображение выше, чтобы просмотреть видео этого урока.)*
 
-Генеративный ИИ — это искусственный интеллект, способный генерировать текст, изображения и другие типы контента. Что делает эту технологию фантастической, так это то, что она распространяет ИИ: любой может использовать ее, используя естественный язык. Вам не нужно изучать такой язык, как Java или SQL, чтобы добиться чего-то стоящего, все, что вам нужно, это использовать свой язык, сформулировать то, что вы хотите, и получить ответ от модели ИИ. Возможности использования этой технологии огромны: вы создаете или конспектируете отчеты, пишете программы и многое другое, и все это за секунды. 
+Генеративный ИИ (Generative AI) — это искусственный интеллект, способный генерировать текст, изображения и другие типы контента. Что делает эту технологию фантастической, так это то, что она распространяет ИИ: любой может использовать ее, используя естественный язык. Вам не нужно изучать такой язык, как Java или SQL, чтобы добиться чего-то стоящего, все, что вам нужно, это использовать свой язык, сформулировать то, что вы хотите, и получить ответ от модели ИИ. Возможности использования этой технологии огромны: вы создаете или конспектируете отчеты, пишете программы и многое другое, и все это за секунды. 
 
 В этом курсе мы рассмотрим, как наш стартап использует генеративный искусственный интеллект для открытия новых сценариев в мире образования и как мы решаем неизбежные проблемы, связанные с социальными последствиями его применения и технологическими ограничениями.
 
@@ -34,7 +34,7 @@
 
 Ожидается, что генеративный искусственный интеллект произведет революцию в том, как мы учимся и обучаем сегодня: учащиеся будут иметь в своем распоряжении виртуальных учителей 24 часа в сутки, которые предоставляют из себя огромные объемы информации и примеров, а учителя смогут использовать инновационные инструменты для оценки своих учеников и предоставления обратной связи.
 
-![Five young students looking at a monitor - image by DALLE2](./images/students-by-DALLE2.png?WT.mc_id=academic-105485-koreyst)
+![Пятеро молодых студентов смотрят на монитор – изображение DALLE2](./images/students-by-DALLE2.png?WT.mc_id=academic-105485-koreyst)
 
 Для начала давайте определим некоторые основные понятия и терминологию, которые мы будем использовать в учебной программе.
 
@@ -71,76 +71,76 @@
 
 В следующей главе мы собираемся изучить различные типы моделей генеративного ИИ, а пока давайте посмотрим, как работают большие языковые модели, уделив особое внимание моделям OpenAI GPT (генеративный предварительно обученный преобразователь(трансформер)).
 
-* **Tokenizer, text to numbers**: Large Language Models receive a text as input and generate a text as output. However, being statistical models, they work much better with numbers than text sequences. That’s why every input to the model is processed by a tokenizer, before being used by the core model. A token is a chunk of text – consisting of a variable number of characters, so the tokenizer's main task is splitting the input into an array of tokens. Then, each token is mapped with a token index, which is the integer encoding of the original text chunk.
+* **Токенизатор, преобразование текста в числа**: большие языковые модели получают текст на входе и генерируют текст на выходе. Однако, будучи статистическими моделями, они гораздо лучше работают с числами, чем с текстовыми последовательностями. Вот почему каждый вход в модель обрабатывается токенизатором, прежде чем использоваться центральной моделью. Токен — это фрагмент текста, состоящий из переменного количества символов, поэтому основная задача токенизатора — разделение входных данных на массив токенов. Затем каждому токену сопоставляется индекс токена, который представляет собой целочисленную кодировку исходного фрагмента текста.
 
-![Example of tokenization](./images/tokenizer-example.png?WT.mc_id=academic-105485-koreyst)
+![Пример токенизации](./images/tokenizer-example.png?WT.mc_id=academic-105485-koreyst)
 
-* **Predicting output tokens**: Given n tokens as input (with max n varying from one model to another), the model is able to predict one token as output. This token is then incorporated into the input of the next iteration, in an expanding window pattern, enabling a better user experience of getting one (or multiple) sentence as an answer. This explains why, if you ever played with ChatGPT, you might have noticed that sometimes it looks like it stops in the middle of a sentence.
+* **Прогнозирование выходных токенов**: учитывая n токенов в качестве входных данных (максимальное число n варьируется от одной модели к другой), модель способна предсказать один токен в качестве выходных данных. Затем этот токен включается во входные данные следующей итерации в шаблоне расширяющегося окна, что позволяет пользователю лучше получать одно (или несколько) предложений в качестве ответа. Это объясняет, почему, если вы когда-либо играли с ChatGPT, вы могли заметить, что иногда кажется, что он останавливается в середине предложения.
 
-* **Selection process, probability distribution**: The output token is chosen by the model according to its probability of occurring after the current text sequence. This is because the model predicts a probability distribution over all possible ‘next tokens’, calculated based on its training. However, not always the token with the highest probability is chosen from the resulting distribution. A degree of randomness is added to this choice, in a way that the model acts in a non-deterministic fashion - we do not get the exact same output for the same input. This degree of randomness is added to simulate the process of creative thinking and it can be tuned using a model parameter called temperature.
+* **Процесс выбора, распределение вероятностей**: выходной токен выбирается моделью в соответствии с вероятностью его появления после текущей текстовой последовательности. Это связано с тем, что модель прогнозирует распределение вероятностей по всем возможным «следующим токенам», рассчитанное на основе ее обучения. Однако не всегда из полученного распределения выбирается токен с наибольшей вероятностью. К этому выбору добавляется степень случайности, так что модель действует недетерминированным образом - мы не получаем точно такой же результат для одних и тех же входных данных. Эта степень случайности добавляется для имитации процесса творческого мышления, и ее можно настроить с помощью параметра модели, называемого температурой.
 
-## How can our startup leverage Large Language Models?
+## Как наш стартап может использовать большие языковые модели?
 
-Now that we have a better understanding of the inner working of a large language model, let’s see some practical examples of the most common tasks they can perform pretty well, with an eye to our business scenario.
-We said that the main capability of a Large Language Model is *generating a text from scratch, starting from a textual input, written in natural language*.
+Теперь, когда мы лучше понимаем внутреннюю работу большой языковой модели, давайте рассмотрим несколько практических примеров наиболее распространенных задач, которые они могут выполнять довольно хорошо, с учетом нашего бизнес-сценария.
+Мы говорили, что основная возможность модели большого языка — это *генерация текста с нуля, начиная с текстового ввода, написанного на естественном языке*.
 
-But what kind of textual input and output?
-The input of a large language model is known as prompt, while the output is known as completion, term that refers to the model mechanism of generating the next token to complete the current input. We are going to dive deep into what is a prompt and how to design it in a way to get the most out of our model. But for now, let’s just say that a prompt may include:
+Но какой текстовый ввод и вывод?
+Входные данные большой языковой модели называются prompt(приглашение), а выходные данные — completion(завершение), термином, который относится к механизму модели, генерирующему следующий токен для завершения текущего ввода. Мы собираемся углубиться в то, что такое prompt и как ее спроектировать, чтобы получить максимальную отдачу от нашей модели. Но сейчас давайте просто скажем, что prompt может включать в себя:
 
-* An **instruction** specifying the type of output we expect from the model. This instruction sometimes might embed some examples or some additional data.
+* **Инструкцию**, определяющуюя тип выходных данных, которые мы ожидаем от модели. Иногда эта инструкция может содержать примеры или дополнительные данные.
 
-    1. Summarization of an article, book, product reviews and more, along with extraction of insights from unstructured data.
+    1. Обобщение статьи, книги, обзоров продуктов и т. д., а также извлечение ценной информации из неструктурированных данных.
     
-    ![Example of summarization](./images/summarization-example.png?WT.mc_id=academic-105485-koreyst)
+    ![Пример обобщения](./images/summarization-example.png?WT.mc_id=academic-105485-koreyst)
 
     <br>
     
-    2. Creative ideation and design of an article, an essay, an assignment or more.
+    2. Творческая идея и дизайн статьи, эссе, задания и т. д.
     
-    ![Example of creative writing](./images/creative-writing-example.png?WT.mc_id=academic-105485-koreyst)
+    ![Пример творческого письма](./images/creative-writing-example.png?WT.mc_id=academic-105485-koreyst)
 
     <br>
     
-* A **question**, asked in the form of a conversation with an agent.
+* **Вопрос**, заданный в форме разговора с агентом.
   
-![Example of conversation](./images/conversation-example.png?WT.mc_id=academic-105485-koreyst)
+![Пример разговора](./images/conversation-example.png?WT.mc_id=academic-105485-koreyst)
 
 <br>
 
-* A chunk of **text to complete**, which implicitly is an ask for writing assistance.
+* Фрагмент **текста для завершения**, который косвенно представляет собой просьбу о помощи в написании.
    
-![Example of text completion](./images/text-completion-example.png?WT.mc_id=academic-105485-koreyst)
+![Пример завершения текста](./images/text-completion-example.png?WT.mc_id=academic-105485-koreyst)
 
 <br>
 
-* A chunk of **code** together with the ask of explaining and documenting it, or a comment asking to generate a piece of code performing a specific task.
+* Кусок **кода** вместе с просьбой объяснить и задокументировать его или комментарий с просьбой сгенерировать фрагмент кода, выполняющий конкретную задачу.
 
-![Coding example](./images/coding-example.png?WT.mc_id=academic-105485-koreyst)
+![Пример кода](./images/coding-example.png?WT.mc_id=academic-105485-koreyst)
 
 <br>
 
-The examples above are quite simple and don’t want to be an exhaustive demonstration of Large Language Models capabilities. They just want to show the potential of using generative AI, in particular but not limited to educational context.
+Приведенные выше примеры довольно просты и не претендуют на исчерпывающую демонстрацию возможностей моделей большого языка. Они просто хотят показать потенциал использования генеративного ИИ, в частности, в образовательном контексте, но не ограничиваясь этим.
 
-Also, the output of a generative AI model is not perfect and sometimes the creativity of the model can work against it, resulting in an output which is a combination of words that the human user can interpret as a mystification of reality, or it can be offensive. Generative AI is not intelligent - at least in the more comprehensive definition of intelligence, including critical and creative reasoning or emotional intelligence; it is not deterministic, and it is not trustworthy, since fabrications, such as erroneous references, content, and statements, may be combined with correct information, and presented in a persuasive and confident manner. In the following lessons, we’ll be dealing with all these limitations and we’ll see what we can do to mitigate them.
+Кроме того, выходные данные генеративной модели ИИ не идеальны, и иногда креативность модели может работать против этого, в результате чего выходные данные представляют собой комбинацию слов, которые пользователь-человек может интерпретировать как мистификацию реальности или же это может быть оскорбительным. Генеративный ИИ не является разумным – по крайней мере, в более широком определении интеллекта, включая критическое и творческое мышление или эмоциональный интеллект; он не детерминирован и не заслуживает доверия, поскольку выдумки, такие как ошибочные ссылки, содержание и утверждения, могут сочетаться с правильной информацией и представляться убедительно и уверенно. В следующих уроках мы будем иметь дело со всеми этими ограничениями и посмотрим, что можно сделать, чтобы их смягчить.
 
-## Assignment
+## Назначение
 
-Your assignment is to read up more on [generative AI](https://en.wikipedia.org/wiki/Generative_artificial_intelligence?WT.mc_id=academic-105485-koreyst) and try to identify an area where you would add generative AI today that doesn't have it. How would the impact be different from doing it the "old way", can you do something you couldn't before, or are you faster? Write a 300 word summary on what your dream AI startup would look like and include headers like "Problem", "How I would use AI", "Impact" and optionally a business plan. 
+Ваше задание — узнать больше о [генеративный ИИ](https://en.wikipedia.org/wiki/Generative_artificial_intelligence?WT.mc_id=academic-105485-koreyst) и попытаться определить область, куда вы бы сегодня добавили генеративный ИИ, где его нет. Насколько эффект будет отличаться от «старого способа»: можете ли вы сделать что-то, чего не могли раньше, или вы быстрее? Напишите краткое изложение объемом 300 слов о том, как будет выглядеть стартап вашей мечты в области ИИ, и включите такие заголовки, как «Проблема», «Как я бы использовал ИИ», «Воздействие» и, при необходимости, бизнес-план. 
 
-If you did this task, you might even be ready to apply to Microsoft's incubator, [Microsoft for Startups Founders Hub](https://www.microsoft.com/startups?WT.mc_id=academic-105485-koreyst) we offer credits for both Azure, OpenAI, mentoring and much more, check it out!
+Если бы вы справились с этой задачей, возможно, вы даже были бы готовы подать заявку в инкубатор Microsoft, [Центр основателей Microsoft для стартапов](https://www.microsoft.com/startups?WT.mc_id=academic-105485-koreyst) мы предлагаем кредиты на Azure, OpenAI, наставничество и многое другое, попробуйте!
 
-## Knowledge check
+## Проверка знаний
 
-What's true about large language models?
+Что верно в отношении больших языковых моделей?
 
-1. You get the exact same response every time.
-1. It does things perfectly, great at adding numbers, produce working code etc.
-1. The response may vary despite using the same prompt. It's also great at giving you a first draft of something, be it text or code. But you need to improve on the results.
+1. Вы каждый раз получаете один и тот же ответ.
+1. Они отлично справляются со всеми задачами, отлично складывают числа, создают рабочий код и т. д.
+1. Ответ может отличаться, несмотря на использование одной и той же подсказки. Онт также отлично подходят для предоставления вам первого черновика чего-либо, будь то текст или код. Но вам нужно улучшить результаты.
 
-A: 3, an LLM is non-deterministic, the response vary, however, you can control its variance via a temperature setting. You also shouldn't expect it to do things perfectly, it's here to do the heavy-lifting for you which often means you get a good first attempt at something that you need to gradually improve.
+О: 3. LLM недетерминирован, реакция варьируется, однако вы можете контролировать ее отклонение с помощью настройки температуры. Вы также не должны ожидать, что он сделает все идеально, он существует, чтобы сделать за вас тяжелую работу, что часто означает, что вы получаете хорошую первую попытку чего-то, что вам нужно дальше доработать.
 
-## Great Work! Continue the Journey 
+## Отличная работа! Продолжайте путешествие 
 
-After completing this lesson, check out our [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) to continue leveling up your Generative AI knowledge!
+После завершения этого урока ознакомьтесь с нашим [Коллекция обучения генеративному искусственному интеллекту](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) чтобы продолжить совершенствовать свои знания о генеративном искусственном интеллекте!
 
-Head over to Lesson 2 where we will look at how to [explore and compare different LLM types](../02-exploring-and-comparing-different-llms/README.md?WT.mc_id=academic-105485-koreyst)!
+Переходим ко второму уроку, где мы рассмотрим, как [исследовать и сравнивать различные типы LLM](../02-exploring-and-comparing-different-llms/README.md?WT.mc_id=academic-105485-koreyst)!
