@@ -1,36 +1,36 @@
-# Introduction to Generative AI and Large Language Models
+# Введение в генеративный искусственный интеллект и большие языковые модели
 
 [![Introduction to Generative AI and Large Language Models](./images/01-lesson-banner.png?WT.mc_id=academic-105485-koreyst)](https://learn.microsoft.com/_themes/docs.theme/master/en-us/_themes/global/video-embed.html?id=36c6795a-e63c-46dd-8d69-df8bbe6e7bc9?WT.mc_id=academic-105485-koreyst)
 
 *(Click the image above to view video of this lesson)*
 
-Generative AI is artificial intelligence capable of generating text, images and other types of content. What makes it a fantastic technology is that it democratizes AI, anyone can use it with as little as a text prompt, a sentence written in a natural language. There's no need for you to learn a language like Java or SQL to accomplish something worthwhile, all you need is to use your language, state what you want and out comes a suggestion from an AI model. The applications and impact for this is huge, you write or understand reports, write applications and much more, all in seconds. 
+Генеративный ИИ — это искусственный интеллект, способный генерировать текст, изображения и другие типы контента. Что делает эту технологию фантастической, так это то, что она распространяет ИИ: любой может использовать ее, используя естественный язык. Вам не нужно изучать такой язык, как Java или SQL, чтобы добиться чего-то стоящего, все, что вам нужно, это использовать свой язык, сформулировать то, что вы хотите, и получить ответ от модели ИИ. Возможности использования этой технологии огромны: вы создаете или конспектируете отчеты, пишете программы и многое другое, и все это за секунды. 
 
-In this curriculum, we’ll explore how our startup leverages generative AI to unlock new scenarios in the education world and how we address the inevitable challenges associated with the social implications of its application and the technology limitations.
+В этом курсе мы рассмотрим, как наш стартап использует генеративный искусственный интеллект для открытия новых сценариев в мире образования и как мы решаем неизбежные проблемы, связанные с социальными последствиями его применения и технологическими ограничениями.
 
-## Introduction
+## Введение
 
-This lesson will cover:
+В этом уроке будут рассмотрены:
 
-* Introduction to the business scenario: our startup idea and mission.
-* Generative AI and how we landed on the current technology landscape.
-* Inner working of a large language model.
-* Main capabilities and practical use cases of Large Language Models.
+* Введение в бизнес-сценарий: идея и миссия нашего стартапа.
+* Генеративный искусственный интеллект и как мы попали в современный технологический ландшафт.
+* Внутреннее устройство большой языковой модели.
+* Основные возможности и варианты практического использования больших языковых моделей.
 
-## Learning Goals
+## Цели обучения
 
-After completing this lesson, you will understand:
+Пройдя этот урок, вы поймете:
 
-* What generative AI is and how Large Language Models work.
-* How you can leverage large language models for different use cases, with a focus on education scenarios.
+* Что такое генеративный искусственный интеллект и как работают большие языковые модели.
+* Как можно использовать большие языковые модели для различных случаев использования с акцентом на сценарии обучения.
 
-## Scenario: our educational startup 
+## Сценарий: наш образовательный стартап 
 
-Generative Artificial Intelligence (AI) represents the pinnacle of AI technology, pushing the boundaries of what was once thought impossible. Generative AI models have several capabilities and applications, but for this curriculum we'll explore how it's revolutionizing education through a fictional startup. We'll refer to this startup as *our startup*. Our startup works in the education domain with the ambitious mission statement of 
+Генеративный искусственный интеллект (ИИ) представляет собой вершину технологии ИИ, отодвигая границы невозможного дальше. Генеративные модели ИИ имеют различные возможности применения, но в этой учебной программе мы рассмотрим, как они революционизируют образование с помощью вымышленного стартапа. Мы будем называть этот стартап *наш стартап*. Наш стартап работает в сфере образования с амбициозной миссией: 
 
-> *improving accessibility in learning, on a global scale, ensuring equitable access to education and providing personalized learning experiences to every learner, according to their needs*.
+> *улучшение доступности обучения в глобальном масштабе, обеспечение справедливого доступа к образованию и предоставление индивидуального опыта обучения каждому учащемуся в соответствии с его потребностями*.
 
-Our startup team is aware we’ll not be able to achieve this goal without leveraging one of the most powerful tools of modern times – Large Language Models (LLMs).
+Наша команда стартапа осознает, что мы не сможем достичь этой цели без использования одного из самых мощных инструментов современности — больших языковых моделей. (БЯМ(LargeLanguageModel, LLM)).
 
 Generative AI is expected to revolutionize the way we learn and teach today, with students having at their disposal virtual teachers 24 hours a day who provide vast amounts of information and examples, and teachers able to leverage innovative tools to assess their students and give feedback.
 
