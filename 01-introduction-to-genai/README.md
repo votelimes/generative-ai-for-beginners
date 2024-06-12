@@ -32,44 +32,44 @@
 
 Наша команда стартапа осознает, что мы не сможем достичь этой цели без использования одного из самых мощных инструментов современности — больших языковых моделей. (БЯМ(LargeLanguageModel, LLM)).
 
-Generative AI is expected to revolutionize the way we learn and teach today, with students having at their disposal virtual teachers 24 hours a day who provide vast amounts of information and examples, and teachers able to leverage innovative tools to assess their students and give feedback.
+Ожидается, что генеративный искусственный интеллект произведет революцию в том, как мы учимся и обучаем сегодня: учащиеся будут иметь в своем распоряжении виртуальных учителей 24 часа в сутки, которые предоставляют из себя огромные объемы информации и примеров, а учителя смогут использовать инновационные инструменты для оценки своих учеников и предоставления обратной связи.
 
 ![Five young students looking at a monitor - image by DALLE2](./images/students-by-DALLE2.png?WT.mc_id=academic-105485-koreyst)
 
-To start, let’s define some basic concepts and terminology we’ll be using throughout the curriculum.
+Для начала давайте определим некоторые основные понятия и терминологию, которые мы будем использовать в учебной программе.
 
-## How did we get Generative AI?
+## Как мы получили генеративный ИИ?
 
-Despite the extraordinary *hype* created lately by the announcement of generative AI models, this technology is decades in the making, with the first research efforts dating back to 60s. We're now at a point with AI having human cognitive capabilities, like conversation as shown by for example [OpenAI ChatGPT](https://openai.com/chatgpt) or [Bing Chat](https://www.microsoft.com/edge/features/bing-chat?WT.mc_id=academic-105485-koreyst), which also uses a GPT model for the web search Bing conversations.
+Несмотря на необычайный *хайп*, вызванный в последнее время анонсом генеративных моделей искусственного интеллекта, эта технология разрабатывается десятилетиями, а первые исследовательские усилия относятся к 60-м годам. Сейчас мы подошли к моменту, когда ИИ обладает человеческими когнитивными способностями, такими как разговор, как показано, например, [OpenAI ChatGPT](https://openai.com/chatgpt) или [Bing Chat](https://www.microsoft.com/edge/features/bing-chat?WT.mc_id=academic-105485-koreyst), который также использует модель GPT для построения диалогов Bing в веб-поиске.
 
-Backing up a bit, the  very first prototypes of AI consisted of typewritten chatbots, relying on a knowledge base extracted from a group of experts and represented into a computer. The answers in the knowledge base were triggered by keywords appearing in the input text.
-However, it soon became clear that such approach, using typewritten chatbots, did not scale well.
+Возвращаясь немного в прошлое, самые первые прототипы ИИ представляли собой машинописные чат-боты, опиравшиеся на базу знаний, разработанную группой экспертов и представленную в компьютере. Ответы в базе знаний выискивались по ключевым словам, появляющимися во входном тексте(в запросе).
+Однако вскоре стало ясно, что такой подход с использованием машинописных чат-ботов плохо масштабируется.
 
-### A statistical approach to AI: Machine Learning
+### Статистический подход к ИИ: машинное обучение
 
-A turning point arrived during the 90s, with the application of a statistical approach to text analysis. This led to the development of new algorithms – known with the name of machine learning - able to learn patterns from data, without being explicitly programmed. This approach allows a machine to simulate human language understanding: a statistical model is trained on text-label pairings, enabling the model to classify unknown input text with a pre-defined label representing the intention of the message.
+Поворотный момент наступил в 90-е годы с применением статистического подхода к анализу текста. Это привело к разработке новых алгоритмов, известных под названием машинное обучение, способных изучать закономерности на основе данных без явного программирования. Этот подход позволяет машине имитировать понимание человеческого языка: статистическая модель обучается на парах входные-выходные данные(text-label), что позволяет модели классифицировать неизвестный входной текст с помощью заранее определенной категории, отражающей смысл сообщения.
 
-### Neural networks and modern virtual assistants
+### Нейронные сети и современные виртуальные помощники
 
-In more recent times, the technological evolution of the hardware, capable of handling larger amounts of data and more complex computations, encouraged research in the AI fields, leading to the development of advanced machine learning algorithms – called neural networks or deep learning algorithms.
+В последнее время технологическая эволюция аппаратного обеспечения, способного обрабатывать большие объемы данных и более сложные вычисления, стимулировала исследования в области искусственного интеллекта, что привело к разработке передовых алгоритмов машинного обучения, называемых нейронными сетями или алгоритмами глубокого обучения.
 
-Neural networks (and in particular Recurrent Neural Networks – RNNs) significantly enhanced natural language processing, enabling the representation of the meaning of text in a more meaningful way, valuing the context of a word in a sentence.
+Нейронные сети (и, в частности, рекуррентные нейронные сети – RNN) значительно улучшили обработку естественного языка, позволяя более осмысленно представлять смысл текста, оценивая контекст слова в предложении.
 
-This is the technology that powered the virtual assistants born in the first decade of the new century, very proficient in interpreting the human language, identifying a need, and performing an action to satisfy it – like answering with a pre-defined script or consuming a 3rd party service.
+Это технология, которая позволила виртуальным помощникам, рожденным в первом десятилетии нового века, очень хорошо интерпретировать человеческий язык, определять потребности и выполнять действия – например, отвечать заранее заданным сценарием или потреблять Сторонний сервис.
 
-### Present day, Generative AI
+### Сегодняшний день, Генеративный ИИ
 
-So that’s how we came to Generative AI today, which can be seen as a subset of deep learning.
+Вот как сегодня мы пришли к генеративному искусственному интеллекту, который можно рассматривать как разновидность глубокого обучения.
 
 ![AI, ML, DL and Generative AI](./images/AI-diagram.png?WT.mc_id=academic-105485-koreyst)
 
-After decades of research in the AI field, a new model architecture – called *Transformer* – overcame the limits of RNNs, being able to get much longer sequences of text as input. Transformers are based on the attention mechanism, enabling the model to give different weights to the inputs it receives, ‘paying more attention’ where the most relevant information is concentrated, regardless of their order in the text sequence.
+После десятилетий исследований в области искусственного интеллекта новая архитектура модели, названная *Transformer*, преодолела ограничения RNN и смогла получать на вход гораздо более длинные последовательности текста. Трансформаторы основаны на механизме внимания, позволяющем модели придавать разные веса входным данным, которые она получает, «уделяя больше внимания» тем местам, где сосредоточена наиболее релевантная информация, независимо от их порядка в текстовой последовательности.
 
-Most of the recent generative AI models – also known as Large Language Models (LLMs), since they work with textual inputs and outputs – are indeed based on this architecture. What’s interesting about these models – trained on a huge amount of unlabeled data from diverse sources like books, articles and websites – is that they can be adapted to a wide variety of tasks and generate grammatically correct text with a semblance of creativity. So, not only did they incredibly enhance the capacity of a machine to ‘understand’ an input text, but they enabled their capacity to generate an original response in human language.
+Большинство последних генеративных моделей ИИ, также известных как большие языковые модели (БЯМ, LLM), поскольку они работают с текстовыми вводами и выводами, действительно основаны на этой архитектуре. Что интересно в этих моделях, обученных на огромном количестве неразмеченных данных из различных источников, таких как книги, статьи и веб-сайты, так это то, что их можно адаптировать к широкому спектру задач и генерировать грамматически правильный текст с подобием творчества. Таким образом, они не только невероятно увеличили способность машины «понимать» вводимый текст, но и позволили ей генерировать оригинальный ответ на человеческом языке.
 
-## How do large language models work?
+## Как работают большие языковые модели?
 
-In the next chapter we are going to explore different types of Generative AI models, but for now let’s have a look at how large language models work, with a focus on OpenAI GPT (Generative Pre-trained Transformer) models.
+В следующей главе мы собираемся изучить различные типы моделей генеративного ИИ, а пока давайте посмотрим, как работают большие языковые модели, уделив особое внимание моделям OpenAI GPT (генеративный предварительно обученный преобразователь(трансформер)).
 
 * **Tokenizer, text to numbers**: Large Language Models receive a text as input and generate a text as output. However, being statistical models, they work much better with numbers than text sequences. That’s why every input to the model is processed by a tokenizer, before being used by the core model. A token is a chunk of text – consisting of a variable number of characters, so the tokenizer's main task is splitting the input into an array of tokens. Then, each token is mapped with a token index, which is the integer encoding of the original text chunk.
 
