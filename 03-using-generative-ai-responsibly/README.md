@@ -1,76 +1,78 @@
-# Using Generative AI Responsibly
+# Ответственное использование генеративного ИИ (принципы Responsible AI)
 
-[![Using Generative AI Responsibly](./images/03-lesson-banner.png?WT.mc_id=academic-105485-koreyst)]() 
+[![Ответственное использование генеративного ИИ](./images/03-lesson-banner.png?WT.mc_id=academic-105485-koreyst)]() 
 
-> **Video Coming Soon**
+> **Видео скоро появится**
 
-It's easy to be fascinated with AI and generative AI in particular, but you need to consider how you would use it responsibly. You need to consider things like how to ensure the output is fair, non-harmful and more. This chapter aims to provide you with mentioned context, what to consider, and how to take active steps to improve your AI usage.
+Легко увлечься искусственным интеллектом и, в частности, генеративным искусственным интеллектом, но вам нужно подумать о том, как вы будете использовать его ответственно. Вам необходимо подумать о том, как обеспечить честность, безвредность результатов и многое другое. Цель этой главы — предоставить вам упомянутый контекст, узнать, что следует учитывать и как предпринять активные шаги для улучшения использования ИИ.
 
-## Introduction
+## Введение
 
-This lesson will cover:
+В этом уроке будут рассмотрены:
 
-- Why you should prioritize Responsible AI when building Generative AI applications.
-- Core principles of Responsible AI and how they relate to Generative AI.
-- How to put these Responsible AI principles into practice through strategy and tooling.
+- Почему вам следует использовать Responsible AI при создании приложений генеративного ИИ.
+- Основные принципы Responsible AI и их отношение к генеративному ИИ.
+- Как реализовать принципы Responsible AI на практике с помощью стратегии и инструментов.
 
-## Learning Goals
+## Цели обучения
 
-After completing this lesson you will know: 
+Пройдя этот урок, вы будете знать:
 
-- The importance of Responsible AI when building Generative AI applications.
-- When to think and apply the core principles of Responsible AI when building Generative AI applications.
-- What tools and strategies are available to you to put the concept of Responsible AI into practice.
+- Важность Responsible AI при создании приложений генеративного ИИ.
+- Когда следует подумать и применить основные принципы Responsible AI при создании приложений генеративного ИИ.
+- Какие инструменты и стратегии вам доступны для реализации концепции Responsible AI на практике.
 
-## Responsible AI Principles
+## Responsible AI принципы
 
-The excitement of Generative AI has never been higher. This excitement has brought a lot of new developers, attention, and funding to this space. While this is very positive for anyone looking to build products and companies using Generative AI, it is also important we proceed responsibly.
+Волнение от генеративного искусственного интеллекта никогда не было таким высоким. Это волнение привлекло в отрасль множество новых разработчиков, внимание и финансирование. Хотя это очень позитивно для всех, кто хочет создавать продукты и компании с использованием генеративного искусственного интеллекта, также важно, чтобы мы действовали ответственно.
 
-Throughout this course, we are focusing on building our startup and our AI education product. We’ll use the principles of Responsible AI: Fairness, Inclusiveness, Reliability/Safety, Security & Privacy, Transparency and Accountability. With these principles, we will explore how they relate to our use of Generative AI in our products.
+На протяжении всего этого курса мы концентрируемся на создании нашего стартапа и образовательного продукта в области искусственного интеллекта. Мы будем использовать принципы Responsible AI: справедливость, инклюзивность, надежность/безопасность, безопасность и конфиденциальность, прозрачность и подотчетность. Используя эти принципы, мы исследуем, как они связаны с использованием генеративного искусственного интеллекта в наших продуктах..
 
-## Why Should You Prioritize Responsible AI
+## Почему вам следует отдавать приоритет ответственному ИИ
 
-When building a product, taking a human-centric approach by keeping your user's best interest in mind leads to the best results.
+При создании продукта использование человекоориентированного подхода, учитывающего интересы пользователя, приводит к лучшим результатам.
 
-The uniqueness of Generative AI is its power to create helpful answers, information, guidance, and content for users. This can be done without many manual steps which can lead to very impressive results. Without proper planning and strategies, it can also unfortunately lead to some harmful results for your users, your product, and society as a whole.
+Уникальность генеративного искусственного интеллекта заключается в его способности создавать полезные ответы, информацию, рекомендации и контент для пользователей. Это можно сделать без большого количества ручных действий, что может привести к очень впечатляющим результатам. Без надлежащего планирования и стратегии это, к сожалению, может привести к некоторым вредным последствиям для ваших пользователей, вашего продукта и общества в целом.
 
-Let's look at some (but not all) of these potentially harmful results:
+Давайте посмотрим на некоторые (но не на все) из этих потенциально вредных результатов:
 
-### Hallucinations
+### Галлюцинации
 
-Hallucinations are a term used to describe when an LLM produces content that is either completely nonsensical or something we know is factually wrong based on other sources of information.
+Галлюцинации — это термин, используемый для описания случаев, когда LLM создает контент, который либо совершенно бессмысленен, либо что-то, что, как мы знаем, фактически неверно на основании других источников информации.
 
-Let's take for example we build a feature for our startup that allows students to ask historical questions to a model. A student asks the question `Who was the sole survivor of Titanic?`
+Давайте, например, создадим функцию для нашего стартапа, которая позволяет студентам задавать модели исторические вопросы. Студент задает вопрос: «Кто был единственным выжившим на Титанике?»
 
-The model produces a response like the one below:
+Модель выдает ответ, подобный приведенному ниже:
 
-![Prompt saying "Who was the sole survivor of the Titanic"](../03-using-generative-ai-responsibly/images/ChatGPT-titanic-survivor-prompt.webp?WT.mc_id=academic-105485-koreyst)
+![Подсказка: «Кто был единственным выжившим на Титанике?»](../03-using-generative-ai-responsibly/images/ChatGPT-titanic-survivor-prompt.webp?WT.mc_id=academic-105485-koreyst)
 
-> *(Source: [Flying bisons](https://flyingbisons.com?WT.mc_id=academic-105485-koreyst))*
+> *(Источник: [Flying bisons](https://flyingbisons.com?WT.mc_id=academic-105485-koreyst))*
 
-This is a very confident and thorough answer. Unfortunately, it is incorrect. Even with a minimal amount of research, one would discover there was more than one survivor of the Titanic disaster. For a student who is just starting to research this topic, this answer can be persuasive enough to not be questioned and treated as fact. The consequences of this can lead to the AI system being unreliable and negatively impact the reputation of our startup.
+Единственным выжившим после катастрофы «Титаника» был Чарльз Джоуин. Он был британским пекарем и главным пекарем на борту «Титаника». Джогину удалось выжить при затоплении, как сообщается, цепляясь за перевернутую спасательную шлюпку и проведя несколько часов в холодной воде, прежде чем его спасло судно RMS Carpathia. Его выживание часто связывают с чрезмерным употреблением алкоголя, который, возможно, помог ему пережить сильный холод. Джоуин дожил до 1956 года и позже предоставил свидетельства о своем опыте во время катастрофы «Титаника».
 
-With each iteration of any given LLM, we have seen performance improvements around minimizing hallucinations. Even with this improvement,  we as application builders and users still need to remain aware of these limitations.
+Это очень уверенный и обстоятельный ответ. К сожалению, это неверно. Даже при минимальном объеме исследований можно было бы обнаружить, что после катастрофы «Титаника» выжило несколько человек. Для студента, который только начинает исследовать эту тему, этот ответ может быть достаточно убедительным, чтобы его не подвергали сомнению и не воспринимали как факт. Последствия этого могут привести к тому, что система искусственного интеллекта станет ненадежной и негативно отразится на репутации нашего стартапа.
 
-### Harmful Content
+С каждой итерацией любого LLM мы наблюдали улучшение производительности в плане минимизации галлюцинаций. Даже несмотря на это улучшение, нам, разработчикам приложений и пользователям, по-прежнему необходимо помнить об этих ограничениях.
 
-We covered in the earlier section when an LLM produces incorrect or nonsensical responses.  Another risk we need to be aware of is when a model responds with harmful content.
+### Вредный контент
 
-Harmful content can be defined as:
+В предыдущем разделе мы рассмотрели случаи, когда LLM выдает неправильные или бессмысленные ответы. Еще один риск, о котором нам нужно знать, — это когда модель отвечает вредоносным контентом.
 
-- Providing instructions or encouraging self-harm or harm to certain groups.
-- Hateful or demeaning content.
-- Guiding planning any type of attack or violent acts.
-- Providing instructions on how to find illegal content or commit illegal acts.
-- Displaying sexually explicit content.
+Вредный контент можно определить как:
 
-For our startup, we want to make sure we have the right tools and strategies in place to prevent this type of content from being seen by students.
+- Предоставление инструкций или поощрение членовредительства или причинения вреда определенным группам.
+- Ненавистнический или унизительный контент.
+- Руководство планированием любого типа нападения или насильственных действий.
+- Предоставление инструкций о том, как найти незаконный контент или совершить незаконные действия.
+- Демонстрация контента откровенно сексуального характера.
 
-### Lack of Fairness
+Что касается нашего стартапа, мы хотим убедиться, что у нас есть правильные инструменты и стратегии, чтобы студенты не видели этот тип контента.
 
-Fairness is defined as “ensuring that an AI system is free from bias and discrimination and that they treat everyone fairly and equally.” In the world of Generative AI, we want to ensure that exclusionary worldviews of marginalized groups are not reinforced by the model’s output.
+### Отсутствие справедливости
 
-These types of outputs are not only destructive to building positive product experiences for our users, but they also cause further societal harm. As application builders, we should always keep a wide and diverse user base in mind when building solutions with Generative AI.
+Справедливость определяется как «гарантия того, что система ИИ свободна от предвзятости и дискриминации и что они относятся ко всем справедливо и одинаково». В мире генеративного искусственного интеллекта мы хотим гарантировать, что исключительные мировоззрения маргинализированных групп не подкрепляются результатами модели.
+
+Подобные результаты не только разрушительны для формирования положительного опыта использования продукта у наших пользователей, но и наносят дополнительный вред обществу. Как разработчики приложений, мы всегда должны учитывать широкую и разнообразную базу пользователей при создании решений с использованием генеративного ИИ.
 
 ## How to Use Generative AI Responsibly
 
