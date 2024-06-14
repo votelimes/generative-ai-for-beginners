@@ -1,16 +1,16 @@
-# Exploring and comparing different LLMs
+# Изучение и сравнение различных LLM
 
-[![Exploring and comparing different LLMs](./images/02-lesson-banner.png?WT.mc_id=academic-105485-koreyst)](https://learn.microsoft.com/_themes/docs.theme/master/en-us/_themes/global/video-embed.html?id=39aa0f98-826a-4f71-a24d-e888a8e80246?WT.mc_id=academic-105485-koreyst)
+[![Изучение и сравнение различных LLM](./images/02-lesson-banner.png?WT.mc_id=academic-105485-koreyst)](https://learn.microsoft.com/_themes/docs.theme/master/en-us/_themes/global/video-embed.html?id=39aa0f98-826a-4f71-a24d-e888a8e80246?WT.mc_id=academic-105485-koreyst)
 
-> *Click the image above to view video of this lesson*
+> *Нажмите на изображение выше, чтобы просмотреть видео этого урока*
 
-With the previous lesson, we have seen how Generative AI is changing the technology landscape, how Large Language Models (LLMs) work and how a business - like our startup - can apply them to their use cases and grow! In this chapter, we're looking to compare and contrast different types of large language models (LLMs) to understand their pros and cons.
+На предыдущем уроке мы увидели, как генеративный ИИ меняет технологический ландшафт, как работают модели больших языков (LLM) и как бизнес, такой как наш стартап, может применять их в своих сценариях использования и расти! В этой главе мы попытаемся сравнить и сопоставить различные типы больших языковых моделей (LLM), чтобы понять их плюсы и минусы.
 
-The next step in our startup's journey is exploring the current landscape of LLMs and understanding which are suitable for our use case.
+Следующим шагом на нашем пути является изучение текущего ландшафта программ LLM и понимание того, какие из них подходят для нашего сценария использования.
 
-## Introduction
+## Введение
 
-This lesson will cover:
+В этом уроке будут рассмотрены:
 
 - Different types of LLMs in the current landscape.
 - Testing, iterating, and comparing different models for your use case in Azure.
