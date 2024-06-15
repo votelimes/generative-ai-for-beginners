@@ -74,62 +74,62 @@
 
 Подобные результаты не только разрушительны для формирования положительного опыта использования продукта у наших пользователей, но и наносят дополнительный вред обществу. Как разработчики приложений, мы всегда должны учитывать широкую и разнообразную базу пользователей при создании решений с использованием генеративного ИИ.
 
-## How to Use Generative AI Responsibly
+## Как ответственно использовать генеративный искусственный интеллект
 
-Now that we have identified the importance of Responsible Generative AI, let's look at 4 steps we can take to build our AI solutions responsibly:
+Теперь, когда мы определили важность принципов Responsible AI, давайте рассмотрим 4 шага, которые мы можем предпринять для ответственного создания наших решений ИИ:
 
-![Mitigate Cycle](./images/mitigate-cycle.png?WT.mc_id=academic-105485-koreyst)
+![Смягчение цикла](./images/mitigate-cycle.png?WT.mc_id=academic-105485-koreyst)
 
-### Measure Potential Harms
+### Оценка потенциального вреда
 
-In software testing, we test the expected actions of a user on an application. Similarly, testing a diverse set of prompts users are most likely going to use is a good way to measure potential harm.
+При тестировании программного обеспечения мы проверяем ожидаемые действия пользователя в приложении. Аналогичным образом, тестирование разнообразного набора подсказок, которые пользователи, скорее всего, будут использовать, является хорошим способом измерения потенциального вреда.
 
-Since our startup is building an education product, it would be good to prepare a list of education-related prompts. This could be to cover a certain subject, historical facts, and prompts about student life.
+Поскольку наш стартап создает образовательный продукт, было бы неплохо подготовить список подсказок, связанных с образованием. Это может быть освещение определенной темы, исторических фактов и подсказок о студенческой жизни.
 
-### Mitigate Potential Harms
+### Смягчение потенциального вреда
 
-It is now time to find ways where we can prevent or limit the potential harm caused by the model and its responses. We can look at this in 4 different layers:
+Настало время найти способы предотвратить или ограничить потенциальный вред, причиняемый моделью и ее реакциями. Мы можем посмотреть на это в 4 разных слоях:
 
-![Mitigation Layers](./images/mitigation-layers.png?WT.mc_id=academic-105485-koreyst)
+![Уровни смягчения последствий](./images/mitigation-layers.png?WT.mc_id=academic-105485-koreyst)
 
-- **Model**. Choosing the right model for the right use case. Larger and more complex models like GPT-4 can cause more of a risk of harmful content when applied to smaller and more specific use cases. Using your training data to fine-tune also reduces the risk of harmful content.
+- **Модель**. Выбор подходящей модели для конкретного случая использования. Более крупные и сложные модели, такие как GPT-4, могут вызвать больший риск вредоносного контента при применении к меньшим и более конкретным случаям использования. Использование данных обучения для точной настройки также снижает риск появления вредоносного контента.
 
-- **Safety System**. A safety system is a set of tools and configurations on the platform serving the model that help mitigate harm. An example of this is the content filtering system on the Azure OpenAI service. Systems should also detect jailbreak attacks and unwanted activity like requests from bots.
+- **Система безопасности**. Система безопасности — это набор инструментов и конфигураций на платформе, обслуживающих модель, которые помогают снизить ущерб. Примером этого является система фильтрации контента в службе Azure OpenAI. Системы также должны обнаруживать атаки с помощью джейлбрейка и нежелательную активность, например запросы от ботов.
 
-- **Metaprompt**. Metaprompts and grounding are ways we can direct or limit the model based on certain behaviors and information. This could be using system inputs to define certain limits of the model. In addition, providing outputs that are more relevant to the scope or domain of the system.
+- **Метаподсказка**. Метаподсказки и заземление — это способы, с помощью которых мы можем направлять или ограничивать модель на основе определенного поведения и информации. Это может быть использование входных данных системы для определения определенных ограничений модели. Кроме того, предоставление результатов, более соответствующих масштабу или области деятельности системы.
 
- It can also be using techniques like Retrieval Augmented Generation (RAG) to have the model only pull information from a selection of trusted sources. There is a lesson later in this course for [building search applications](../08-building-search-applications/README.md?WT.mc_id=academic-105485-koreyst)
+ Также можно использовать такие методы, как поисковая дополненная генерация (RAG), чтобы модель извлекала информацию только из выбранных надежных источников. Далее в этом курсе есть урок по [созданию поисковых приложений](../08-building-search-applications/README.md?WT.mc_id=academic-105485-koreyst)
 
-- **User Experience**. The final layer is where the user interacts directly with the model through our application’s interface in some way. In this way we can design the UI/UX to limit the user on the types of inputs they can send to the model as well as text or images displayed to the user. When deploying the AI application, we also must be transparent about what our Generative AI application can and can’t do.  
+- **Пользовательский опыт**. На последнем уровне пользователь каким-то образом напрямую взаимодействует с моделью через интерфейс нашего приложения. Таким образом, мы можем спроектировать UI/UX так, чтобы ограничить пользователя типами входных данных, которые он может отправлять в модель, а также текстом или изображениями, отображаемыми пользователю. При развертывании приложения ИИ мы также должны четко понимать, что может и чего не может делать наше приложение генеративного ИИ.  
 
-We have an entire lesson dedicated to [Designing UX for AI Applications](../12-designing-ux-for-ai-applications/README.md?WT.mc_id=academic-105485-koreyst)
+У нас есть целый урок, посвященный [проектированию UX для приложений AI](../12-designing-ux-for-ai-applications/README.md?WT.mc_id=academic-105485-koreyst)
 
-- **Evaluate model**. Working with LLMs can be challenging because we don’t always have control over the data the model was trained on. Regardless, we should always evaluate the model’s performance and outputs. It’s still important to measure the model’s accuracy, similarity, groundedness, and relevance of the output. This helps provide transparency and trust to stakeholders and users.
+- **Оценить модель**. Работа с LLM может быть сложной задачей, поскольку мы не всегда можем контролировать данные, на которых обучалась модель. В любом случае, мы всегда должны оценивать производительность и результаты модели. По-прежнему важно измерять точность модели, сходство, обоснованность и релевантность результатов. Это помогает обеспечить прозрачность и доверие к заинтересованным сторонам и пользователям.
 
-### Operate a Responsible Generative AI solution
+### Используйте Responsible Generative AI решения
 
-Building an operational practice around your AI applications is the final stage. This includes partnering with other parts of our startup like Legal and Security to ensure we are compliant with all regulatory policies. Before launching, we also want to build plans around delivery, handling incidents, and rollback to prevent any harm to our users from growing.
+Создание операционной практики вокруг ваших приложений ИИ — это заключительный этап. Это включает в себя партнерство с другими подразделениями нашего стартапа, такими как юридический отдел и отдел безопасности, чтобы обеспечить соблюдение всех нормативных политик. Перед запуском мы также хотим составить планы доставки, обработки инцидентов и отката, чтобы предотвратить рост любого вреда для наших пользователей.
 
-## Tools
+## Инструменты
 
-While the work of developing Responsible AI solutions may seem like a lot, it is work well worth the effort. As the area of Generative AI grows, more tooling to help developers efficiently integrate responsibility into their workflows will mature. For example, the [Azure AI Content Safety](https://learn.microsoft.com/azure/ai-services/content-safety/overview?WT.mc_id=academic-105485-koreyst ) can help detect harmful content and images via an API request.
+Хотя работа по разработке Responsible Generative AI может показаться трудоемкой, она того стоит. По мере роста области генеративного искусственного интеллекта будет появляться больше инструментов, которые помогут разработчикам эффективно интегрировать ответственность в свои рабочие процессы. Например, [Azure AI Content Safety](https://learn.microsoft.com/azure/ai-services/content-safety/overview?WT.mc_id=academic-105485-koreyst ) может помочь обнаружить вредоносный контент и изображения через запрос API.
 
-## Knowledge check
+## Проверка знаний
 
-What are some things you need to care about to ensure responsible AI usage?
+О чем вам нужно позаботиться, чтобы обеспечить ответственное использование ИИ?
 
-1. That the answer is correct.
-1. Harmful usage, that AI isn't used for criminal purposes.
-1. Ensuring the AI is free from bias and discrimination.
+1. О том, что ответ правильный.
+2. Вредное использование: ИИ не используется в преступных целях.
+3. Обеспечение свободы ИИ от предвзятости и дискриминации.
 
-A: 2 and 3 are correct. Responsible AI helps you consider how to mitigate harmful effects and biases and more.
+Ответ: 2 и 3 верны. Ответственный ИИ помогает вам подумать о том, как смягчить вредные последствия и предвзятости и многое другое.
 
-## 🚀 Challenge
+## 🚀 Испытание
 
-Read up on [Azure AI Content Saftey](https://learn.microsoft.com/azure/ai-services/content-safety/overview?WT.mc_id=academic-105485-koreyst) and see what you can adopt for your usage.
+Следите за публикациями [Azure AI Content Saftey](https://learn.microsoft.com/azure/ai-services/content-safety/overview?WT.mc_id=academic-105485-koreyst) и посмотрите, что вы можете использовать в своих целях.
 
-## Great Work, Continue Your Learning
+## Отличная работа, продолжайте обучение
 
-After completing this lesson, check out our [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) to continue leveling up your Generative AI knowledge!
+После завершения этого урока ознакомьтесь с нашим [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) чтобы продолжить совершенствовать свои знания о генеративном искусственном интеллекте!
 
-Head over to Lesson 4 where we will look at [Prompt Engineering Fundamentals](../04-prompt-engineering-fundamentals/README.md?WT.mc_id=academic-105485-koreyst)!
+Переходим к уроку 4, где мы рассмотрим [основы быстрого проектирования](../04-prompt-engineering-fundamentals/README.md?WT.mc_id=academic-105485-koreyst)!
