@@ -1,60 +1,60 @@
-# Creating Advanced prompts
+# Проектирование расширенных подсказок (Advanced prompt engineering)
 
-[![Creating Advanced Prompts](./images/05-lesson-banner.png?WT.mc_id=academic-105485-koreyst)](https://learn.microsoft.com/_themes/docs.theme/master/en-us/_themes/global/video-embed.html?id=f3615e46-dbca-477c-832d-21eef95cd9f3?WT.mc_id=academic-105485-koreyst)
+[![Создание расширенных подсказок](./images/05-lesson-banner.png?WT.mc_id=academic-105485-koreyst)](https://learn.microsoft.com/_themes/docs.theme/master/en-us/_themes/global/video-embed.html?id=f3615e46-dbca-477c-832d-21eef95cd9f3?WT.mc_id=academic-105485-koreyst)
 
-Let's recap some learnings from the previous chapter:
+Давайте подведем некоторые итоги из предыдущей главы:
 
-> Prompt _engineering_ is the process by which we **guide the model towards more relevant responses** by providing more useful instructions or context.
+> Prompt _engineering_  — это процесс, с помощью которого мы **направляем модель к более релевантным ответам**, предоставляя более полезные инструкции или контекст.
 
-There are also two steps to writing prompts, constructing the prompt, by providing relevant context and the second part is _optimization_, how to gradually improve the prompt.
+Есть также два этапа написания подсказки: создание подсказки путем предоставления соответствующего контекста, а вторая часть — это _оптимизация_, как постепенно улучшать подсказку.
 
-At this point, we have some basic understanding of how to write prompts, but we need to go deeper. In this chapter, you will go from trying out various prompts to understanding why one prompt is better than another. You will learn how to construct prompts following some basic techniques that can be applied to any LLM.
+На данный момент у нас есть некоторое базовое понимание того, как писать подсказки, но нам нужно пойти глубже. В этой главе вы пройдете путь от опробования различных подсказок к пониманию того, почему одна подсказка лучше другой. Вы узнаете, как создавать подсказки, используя некоторые базовые методы, которые можно применить к любому LLM.
 
-## Introduction
+## Введение
 
-In this chapter, we will cover the following topics:
+В этой главе мы рассмотрим следующие темы:
 
-- Extend your knowledge of prompt engineering by applying different techniques to your prompts.
-- Configuring your prompts to vary the output.
+- Расшиение ваших знаний в области разработки подсказок, применение к подсказкам различных методов.
+- Настройка подсказок для изменения вывода.
 
-## Learning goals
+## Цели обучения
 
-After completing this lesson, you'll be able to:
+После завершения этого урока вы сможете:
 
-- Apply prompt engineering techniques that improve the outcome of your prompts.
-- Perform prompting that is either varied or deterministic.
+- Применять методы оперативного проектирования, которые улучшат результаты ваших подсказок.
+- Применять подсказки, которые могут быть разнообразными или детерминированными.
 
-## Prompt engineering
+## Проектирование подсказок
 
-Prompt engineering is the process of creating prompts that will produce the desired outcome. There's more to prompt engineering than just writing a text prompt. Prompt engineering is not an engineering discipline, it's more a set of techniques that you can apply to get the desired outcome.
+Проектирование подсказок — это процесс создания подсказок, которые приведут к желаемому результату. Инженерные подсказки — это нечто большее, чем просто написание текстовой подсказки. Проектирование подсказок— это не инженерная дисциплина, а скорее набор методов, которые можно применить для получения желаемого результата.
 
-### An example of a prompt
+### Пример подсказки
 
-Let's take a basic prompt like this one:
+Давайте возьмем базовую подсказку вроде этой:
 
-> Generate 10 questions on geography.
+> Создайте 10 вопросов по географии.
 
-In this prompt, you are actually applying a set of different prompt techniques.
+В этой подсказке вы фактически применяете набор различных методов подсказки.
 
-Let's break this down.
+Давайте разберем это.
 
-- **Context**, you specify it should be about "geography".
-- **Limiting the output**, you want no more than 10 questions.
+- **Контекст**, вы указываете, речь должна идти о «географии».
+- **Ограничение вывода**: вам нужно не более 10 вопросов.
 
-### Limitations of simple prompting
+### Ограничения простых подсказок
 
-You may or may not get the desired outcome. You will get your questions generated, but geography is a big topic and you may not get what you want to due the following reasons:
+Вы можете получить или не получить желаемый результат. Вопросы, конечно, будут сгенерированы, но география — это большая тема, и вы можете получить не то, что хотите, по следующим причинам:
 
-- **Big topic**, you don't know if it's going to be about countries, capitals, rivers and so on.
-- **Format**, what if you wanted the questions to be formatted in a certain way?
+- **Довольно обширная тема**, вы не знаете, будет ли речь идти о странах, столицах, реках и так далее.
+- **Формат**. Что, если вы хотите, чтобы вопросы были отформатированы определенным образом?
 
-As you can see, there's a lot to consider when creating prompts.
+Как видите, при создании подсказок нужно учитывать множество факторов.
 
-So far, we've seen a simple prompt example, but generative AI is capable of much more to help people in a variety of roles and industries. Let's explore some basic techniques next.
+До сих пор мы видели лишь простые примеры, но генеративный ИИ способен на гораздо большее, помогая людям в самых разных ролях и отраслях. Далее давайте рассмотрим некоторые основные методы.
 
-### Techniques for prompting
+### Техники подсказок
 
-First, we need to understand that prompting is an _emergent_ property of an LLM meaning that this is not a feature that is built into the model but rather something we discover as we use the model.
+Во-первых, нам необходимо понять, что подсказка — это новое свойство LLM, означающее, что это не функция, встроенная в модель, а скорее то, что мы обнаруживаем в процессе использования модели.
 
 There are some basic techniques that we can use to prompt an LLM. Let's explore them.
 
