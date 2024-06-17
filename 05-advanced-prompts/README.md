@@ -32,7 +32,7 @@
 
 Давайте возьмем базовую подсказку вроде этой:
 
-> Создайте 10 вопросов по географии.
+> Создай 10 вопросов по географии.
 
 В этой подсказке вы фактически применяете набор различных методов подсказки.
 
@@ -56,168 +56,168 @@
 
 Во-первых, нам необходимо понять, что подсказка — это новое свойство LLM, означающее, что это не функция, встроенная в модель, а скорее то, что мы обнаруживаем в процессе использования модели.
 
-There are some basic techniques that we can use to prompt an LLM. Let's explore them.
+Есть несколько основных методов, которые мы можем использовать для получения ввода в LLM. Давайте изучим их.
 
-- **Zero-shot prompting**, this is the most basic form of prompting. It's a single prompt requesting a response from the LLM based solely on its training data.
-- **Few-shot prompting**, this type of prompting guides the LLM by providing 1 or more examples it can rely on to generate its response.
-- **Chain-of-thought**, this type of prompting tells the LLM how to break down a problem into steps.
-- **Generated knowledge**, to improve the response of a prompt, you can provide generated facts or knowledge additionally to your prompt.
-- **Least to most**, like chain-of-thought, this technique is about breaking down a problem into a series of steps and then ask these steps to be performed in order.
-- **Self-refine**, this technique is about critiquing the LLM's output and then asking it to improve.
-- **Maieutic prompting**. What you want here is to ensure the LLM answer is correct and you ask it to explain various parts of the answer. This is a form of self-refine.
+Zero-shot prompting (Подсказка без обучения) - это самая базовая форма подсказок. Это сам запрос, требующий ответа от LLM, основываясь исключительно на его обучающих данных.
 
-### Zero-shot prompting
+Few-shot prompting (Подсказка с небольшим количеством примеров) - этот тип подсказок направляет LLM, предоставляя один или несколько примеров, на которые он может опираться при формировании ответа.
 
-This style of prompting is very simple, it consists of a single prompt. This technique is probably what you're using as you're starting to learn about LLMs. Here's an example:
+Chain-of-thought (Цепочка мыслей) - этот тип подсказок указывает LLM, как разбить проблему на этапы.
 
-- Prompt: "What is Algebra?"
-- Answer: "Algebra is a branch of mathematics that studies mathematical symbols and the rules for manipulating these symbols."
+Generated knowledge (Сгенерированные знания) - чтобы улучшить ответ на запрос, вы можете предоставить сгенерированные факты или знания в дополнение к вашей подсказке.
 
-### Few-shot prompting
+Least to most (От минимума к максимуму) - подобно цепочке мыслей, эта техника заключается в разбиении проблемы на серию шагов и последовательном их выполнении в порядке возрастания.
 
-This style of prompting helps the model by providing a few examples along with the request. It consists of a single prompt with additional task-specific data. Here's an example:
+Self-refine (Самоусовершенствование) - эта техника заключается в критическом осмыслении вывода LLM и последующем его улучшении.
 
-- Prompt: "Write a poem in the style of Shakespeare. Here are a few examples of Shakespearean sonnets.:
-  Sonnet 18: 'Shall I compare thee to a summer's day? Thou art more lovely and more temperate...'
-  Sonnet 116: 'Let me not to the marriage of true minds Admit impediments. Love is not love Which alters when it alteration finds...'
-  Sonnet 132: 'Thine eyes I love, and they, as pitying me, Knowing thy heart torment me with disdain,...'
-  Now, write a sonnet about the beauty of the moon."
-- Answer: "Upon the sky, the moon doth softly gleam, In silv'ry light that casts its gentle grace,..."
+Maieutic prompting (Майевтическая подсказка) - здесь вы хотите убедиться, что ответ LLM является правильным, и просите его объяснить различные части ответа. Это форма самоусовершенствования.
 
-Examples provide the LLM with the context, format or style of the desired output. They help the model understand the specific task and generate more accurate and relevant responses.
+### Zero-shot prompting (подсказка без обучения)
 
-### Chain-of-thought
+Этот стиль подсказки очень простой, он состоит из одной подсказки. Эта техника, вероятно, то, что вы используете, когда начинаете изучать языковые модели на основе больших данных. Вот пример:
 
-Chain-of-thought is a very interesting technique as it's about taking the LLM through a series of steps. The idea is to instruct the LLM in such a way that it understands how to do something. Consider the following example, with and without chain-of-thought:
+Подсказка: "Что такое алгебра?"
+Ответ: "Алгебра - это раздел математики, который изучает математические символы и правила их преобразования."
 
-    - Prompt: "Alice has 5 apples, throws 3 apples, gives 2 to Bob and Bob gives one back, how many apples does Alice have?"
-    - Answer: 5
+### Few-shot prompting (провокация с небольшим количеством примеров)
 
-LLM answers with 5, which is incorrect. Correct answer is 1 apple, given the calculation (5 -3 -2 + 1 = 1).
+Этот стиль подсказки помогает модели, предоставляя несколько примеров вместе с запросом. Он состоит из одной подсказки с дополнительными данными, специфичными для задачи. Вот пример:
 
-So how can we teach the LLM to do this correctly?
+Подсказка: "Напишите стихотворение в стиле Шекспира. Вот несколько примеров Шекспировских сонетов:
+Сонет 18: 'Пусть буду ль я сравнивать тебя с летним днем? Ты прекрасней и умеренней...'
+Сонет 116: 'Не допущу я пусть встречи истинных душ преград. Любовь не любовь, если меняется при перемене...'
+Сонет 132: 'Твои глаза, и я их люблю, они, сжалившись надо мной, Зная, как сердце мое страдает от твоего презрения,...'
+Теперь напишите сонет о красоте луны."
+Ответ: "На небе луна мягко светит, В серебристом свете, что ласкает своей нежностью,..."
+Примеры предоставляют языковой модели контекст, формат или стиль желаемого вывода. Они помогают модели понять конкретную задачу и генерировать более точные и соответствующие ответы.
 
-Let's try chain-of-thought. Applying chain-of-thought means:
+### Chain-of-thought (цепочка мыслей)
 
-1. Give the LLM a similar example.
-1. Show the calculation, and how to calculate it correctly.
-1. Provide the original prompt.
+Цепочка мыслей (chain-of-thought) - это очень интересная техника, поскольку она заключается в проведении языковой модели через серию шагов. Идея заключается в том, чтобы инструктировать модель таким образом, чтобы она понимала, как выполнить определенное действие. Рассмотрим следующий пример с и без применения цепочки мыслей:
 
-Here's how:
+Подсказка: "У Алисы есть 5 яблок, она выбрасывает 3 яблока, отдает 2 яблока Бобу, и Боб возвращает одно яблоко, сколько яблок остается у Алисы?"
+Ответ: 5
+Языковая модель отвечает 5, что неверно. Правильный ответ - 1 яблоко, основываясь на расчете (5 - 3 - 2 + 1 = 1).
 
-- Prompt: "Lisa has 7 apples, throws 1 apple, gives 4 apples to Bart and Bart gives one back:
-  7 -1 = 6
-  6 -4 = 2
-  2 +1 = 3  
-  Alice has 5 apples, throws 3 apples, gives 2 to Bob and Bob gives one back, how many apples does Alice have?"
-  Answer: 1
+Как мы можем научить языковую модель делать это правильно?
 
-Note how we write substantially longer prompts with another example, a calculation and then the original prompt and we arrive at the correct answer 1.
+Давайте попробуем использовать цепочку мыслей. Применение цепочки мыслей означает:
 
-As you can see chain-of-thought is a very powerful technique.
+Дать языковой модели аналогичный пример.
+Показать расчет и как правильно выполнить его.
+Предоставить исходную подсказку.
+Вот как это может выглядеть:
 
-### Generated knowledge
+Подсказка: "У Лизы есть 7 яблок, она выбрасывает 1 яблоко, отдает 4 яблока Барту, и Барт возвращает одно яблоко:
+7 - 1 = 6
+6 - 4 = 2
+2 + 1 = 3
+У Алисы есть 5 яблок, она выбрасывает 3 яблока, отдает 2 яблока Бобу, и Боб возвращает одно яблоко, сколько яблок остается у Алисы?"
+Ответ: 1
+Обратите внимание, как мы создаем существенно более длинную подсказку с другим примером, расчетом и затем исходной подсказкой, и мы получаем правильный ответ - 1.
 
-Many times when you want to construct a prompt, you want to do so using your own company's data. You want part of the prompt to be from the company and the other part should be the actual prompt you're interested in.
+Как видите, цепочка мыслей является очень мощной техникой.
 
-As an example, this is what your prompt then can look like if you're in the insurance business:
+### Сгенерированные знания (generated knowlege)
+
+Часто, когда вам нужно создать подсказку, вы хотите использовать данные вашей собственной компании. Вы хотите, чтобы часть подсказки была связана с компанией, а другая часть должна быть самой предполагаемой подсказкой, которая вас интересует.
+
+В качестве примера, вот как может выглядеть ваша подсказка, если вы занимаетесь страховым бизнесом:
 
     ```text
     {{company}}: {{company_name}}
     {{products}}:
     {{products_list}}
-    Please suggest an insurance given the following budget and requirements:
-    Budget: {{budget}}
-    Requirements: {{requirements}}
+    Пожалуйста, порекомендуйте страховку на основе следующего бюджета и требований:
+    Бюджет: {{budget}}
+    Требования: {{requirements}}
     ```
 
-Above, you see how the prompt is constructed using a template. In the template there's a number of variables, denoted by `{{variable}}`, that will be replaced with actual values from a company API.
+Выше вы видите, как подсказка создается с использованием шаблона. В шаблоне есть несколько переменных, обозначенных как {{переменная}}, которые будут заменены фактическими значениями из API компании.
 
-Here's an example of how the prompt could look like once the variables have been replaced by content from your company:
+Вот пример того, как может выглядеть подсказка после того, как переменные были заменены содержимым из вашей компании:
 
     ```text
-    Insurance company: ACME Insurance
-    Insurance products (cost per month):
-    - Car, cheap, 500 USD
-    - Car, expensive, 1100 USD
-    - Home, cheap, 600 USD
-    - Home, expensive, 1200 USD
-    - Life, cheap, 100 USD
+    Страховая компания: ACME Insurance
+    Страховые продукты (стоимость в месяц):
+    - Автомобиль, недорогой, 500 долларов США
+    - Автомобиль, дорогой, 1100 долларов США
+    - Жилье, недорогое, 600 долларов США
+    - Жилье, дорогое, 1200 долларов США
+    - Жизнь, недорогая, 100 долларов США
 
-    Please suggest an insurance given the following budget and requirements:
-    Budget: $1000
-    Requirements: Car, Home
+    Пожалуйста, порекомендуйте страховку на основе следующего бюджета и требований:
+    Бюджет: 1000 долларов США
+    Требования: Автомобиль, Жилье
     ```
 
-Running this prompt through an LLM will produce a response like this:
+Запуск данной подсказки через LLM приведет к получению ответа вроде следующего:
 
     ```output
-    , and Life insurance
-
-    Given the budget and requirements, we suggest the following insurance package from ACME Insurance:
-    - Car, cheap, 500 USD
-    - Home, cheap, 600 USD
-    - Life, cheap, 100 USD
-    Total cost: $1,200 USD
+    , и страхование жизни
+    Учитывая бюджет и требования, мы предлагаем следующий страховой пакет от ACME Insurance:
+ - Автомобиль, дешевая, 500 долларов США
+ - Дом, недорогая, 600 долларов США
+ - Жизнь, дешевая, 100 долларов США
+ Общая стоимость: 1200 долларов США.
     ```
 
-As you can see, it also suggests the Life insurance, which it shouldn't. This result is an indication that we need to optimize the prompt by changing the prompt to be clearer on what it can allow. After some _trial and error_, we arrive at the following prompt:
+Как видите, это также предполагает страхование жизни, чего не должно быть. Этот результат указывает на то, что нам необходимо оптимизировать подсказку, изменив ее, чтобы было более понятно, что она может разрешить. После некоторых проб и ошибок мы получаем следующее приглашение:
 
-    ```text
-    Insurance company: ACME Insurance
-    Insurance products (cost per month):
-    - type: Car, cheap, cost: 500 USD
-    - type: Car, expensive, cost: 1100 USD
-    - type: Home, cheap, cost: 600 USD
-    - type: Home, expensive, cost: 1200 USD
-    - type: Life, cheap, cost: 100 USD
+    ```текст
+    Страховая компания: ACME Insurance
+    Страховые продукты (стоимость в месяц):
+    - тип: Легковой, недорогой, стоимость: 500 у.е.
+    - тип: Автомобиль, дорогой, стоимость: 1100 у.е.
+    - тип: Домашний, дешевый, стоимость: 600 у.е.
+    - тип: Домашний, дорогой, стоимость: 1200 у.е.
+    - тип: Жизнь, дешево, стоимость: 100 долларов США
 
-    Please suggest an insurance given the following budget and requirements:
-    Budget: $1000 restrict choice to types: Car, Home
+    Пожалуйста, предложите страховку, учитывая следующий бюджет и требования:
+    Бюджет: $1000. Ограничьте выбор типами: Автомобиль, Дом.
     ```
 
-Note how adding _type_ and _cost_ and also using the keyword _restrict_ helps the LLM to understand what we want.
-
+Обратите внимание, как добавление _type_ и _cost_, а также использование ключевого слова _restrict_ помогает LLM понять, чего мы хотим.
 Now we get the following response:
 
-    ```output
-    Given the budget and requirements, we suggest the Car, Cheap insurance product which costs 500 USD per month.
+    ```вывод
+    Учитывая бюджет и требования, мы предлагаем страховой продукт «Автомобиль, Дешево», стоимость которого составляет 500 долларов США в месяц.
     ```
 
-The point of this example was to show that even though we're using a basic technique like _generated knowledge_, we still need to optimize the prompt in most cases to get the desired outcome.
+Цель этого примера заключалась в том, чтобы показать, что хотя мы и используем базовый метод, такой как _сгенерированные знания_, в большинстве случаев нам все равно необходимо оптимизировать подсказку, чтобы получить желаемый результат.
 
-### Least-to-most
+### От меньшего к большему (least-to-most)
 
-The idea with Least-to-most prompting is to break down a bigger problem into subproblems. That way, you help guide the LLM on how to "conquer" the bigger problem. A good example could be for data science where you can ask the LLM to divide up a problem like so:
+Техника "От меньшего к большему" заключается в разбиении большой проблемы на подзадачи. Таким образом, вы помогаете направить LLM в решении более крупной проблемы. Хорошим примером может быть область науки о данных, где вы можете попросить LLM разделить проблему следующим образом:
 
-> Prompt: How to perform data science in 5 steps?
+> Подсказка: Как описать науку о данных в 5 шагах?
 
-With your AI assistant answering with:
+AI-помощник может ответить следующим образом:
 
-1. Collect data
-1. Clean data
-1. Analyze data
-1. Plot data
-1. Present data
+1. Собрать данные - Этот шаг включает сбор соответствующих данных из различных источников, таких как базы данных, API или файлы.
+2. Очистить данные - После сбора данных необходимо выполнить их предварительную обработку и очистку. Этот шаг включает обработку отсутствующих значений, работу с выбросами и обеспечение согласованности данных.
+3. Анализировать данные - После очистки данных можно применить различные аналитические методы, такие как статистический анализ, алгоритмы машинного обучения или методы добычи данных, для получения информации и извлечения значимых результатов.
+4. Визуализировать данные - Визуализация данных является важным этапом для понимания закономерностей и взаимосвязей. Этот шаг включает создание диаграмм, графиков или других визуальных представлений для эффективного передачи результатов.
+5. Представить данные - Наконец, необходимо представить анализ и полученные результаты в ясной и лаконичной форме. Это может включать создание отчетов, информационных панелей или презентаций для передачи результатов заинтересованным сторонам или лицам, принимающим решения.
 
-### Self-refine, critique the results
+### Самосовершенствование, корректировка результатов (self-refine, critique the results)
 
-With generative AIs and LLMs, you can't trust the output. You need to verify it. After all, the LLM is just presenting you what's the next most likely thing to say, not what's correct. Therefore, a good idea is to ask the LLM to critique itself, which leads us to the self-refine technique.
+С генеративными искусственными интеллектами и моделями на основе LLM нельзя полностью доверять результатам. Необходимо их проверять. В конце концов, LLM просто представляет вам наиболее вероятное следующее высказывание, а не обязательно правильное. Поэтому хорошей идеей является просить LLM оценить себя, что приводит нас к технике самоусовершенствования.
 
-How it works is that you follow the following steps:
+Как это работает: вы следуете следующим шагам:
 
-1. Initial prompt asking the LLM to solve a problem
-1. LLM answers
-1. You critique the answer and ask the AI to improve
-1. LLM answers again, this time considering the critique and suggest solutions it came up with
+1. Первоначальный запрос, в котором вы просите LLM решить проблему.
+2. LLM дает ответ.
+3. Вы критикуете ответ и просите искусственный интеллект улучшить его.
+4. LLM отвечает снова, на этот раз учитывая критику и предлагая решения, которые он придумал.
 
-You can repeat this process as many times as you want.
+Вы можете повторить этот процесс столько раз, сколько захотите.
 
-Here's an example using this technique:
+Вот пример использования этой техники:
 
-> Prompt: "Create a Python Web API with routes products and customers"
+> Подсказка: Создай веб-API на Python с маршрутами "products" и "customers".
 
-AI Answer:
+ИИ Ответ:
 
     ```python
     import flask
@@ -232,18 +232,18 @@ AI Answer:
         return 'Customers'
     ```
 
-> Prompt: suggest 3 improvements of the above code
+> Подсказка: Предложи 3 улучшения для кода выше
 
-AI Answer:
+ИИ Ответ:
 
     ```text
-    Sure, here are three suggestions to improve the code:
+    Конечно, вот три предложения для улучшения кода:
 
-    Import the correct module: The first line should import Flask instead of flask. The correct import statement should be from flask import Flask.
+    Импортируйте правильный модуль: Первая строка должна импортировать Flask, а не flask. Правильная инструкция импорта должна выглядеть так: from flask import Flask.
 
-    Add a main function: Add a if __name__ == '__main__': block to the end of the file to run the application when the file is executed.
+    Добавьте функцию main: Добавьте блок if __name__ == '__main__': в конце файла, чтобы при выполнении файла запускалось приложение.
 
-    Use f-strings: Use f-strings to format the return statements in the route functions. For example, return 'Products' can be changed to return f'This is the {request.path} page'.
+    Используйте f-строки: Используйте f-строки для форматирования операторов return в функциях маршрутов. Например, return 'Products' можно заменить на return f'This is the {request.path} page'.
     ```
 
     ```python
@@ -263,113 +263,113 @@ AI Answer:
         app.run()
     ```
 
-As you can see, the above AI response is improving the first suggested code thanks to critiquing the first answer.
+Как видите, приведенный выше ответ ИИ улучшает первый предложенный код благодаря критике первого ответа.
 
-### Maieutic prompting
+### Майевтическое подсказывание (maieutic prompting)
 
-Maieutic prompting is a technique that is similar to self-refine but it's more about asking the LLM to explain itself. The goal is to reduce inconsistencies in the LLM's output so to ensure it arrives at the correct answer. The workflow to follow is:
+Метод майевтического подсказывания (maieutic prompting) похож на самоусовершенствование (self-refine), но больше связан с просьбой к LLM объяснить свой ответ. Целью является устранение несогласованностей в выводе LLM, чтобы обеспечить правильный ответ. Рекомендуемая последовательность действий следующая:
 
-1. Ask the LLM to answer a question
-1. For each part of the answer, ask the LLM to explain it more in depth.
-1. If there are inconsistencies, discard the parts that are inconsistent.
+1. Попросите LLM ответить на вопрос.
+2. Для каждой части ответа попросите LLM дать более подробное объяснение.
+3. Если есть несогласованности, отбросьте части ответа, которые являются несогласованными.
 
-Repeat 2 and 3 until you've gone through all the parts and you're satisfied with the answer.
+Повторяйте шаги 2 и 3, пока не пройдете все части и не будете удовлетворены ответом.
 
-Here's an example prompt:
+Вот пример подсказки:
 
-> prompt: How can I create a crisis plan to mitigate a pandemic in 5 steps?
-> LLM answer:
+> Подсказка: Как я могу создать кризисный план по смягчению последствий пандемии за 5 шагов?
+> Ответ LLM:
 
     ```text
-    1. Identify the risks
-    1. Identify the stakeholders
-    1. Identify the resources
-    1. Identify the actions
-    1. Identify the communication channels
+    1. Определить риски
+    1. Определите заинтересованные стороны
+    1. Определите ресурсы
+    1. Определите действия
+    1. Определите каналы связи
     ```
 
-It's identified 5 steps, but can we determine if this is correct? Let's ask the LLM to explain each step:
+Определено 5 шагов, но можем ли мы определить, правильны ли они? Давайте попросим LLM объяснить каждый шаг:
 
-> prompt: Explain the first step in more detail, what are the risks in detail with a pandemic?
+> Подсказка: Объясните первый шаг более подробно, каковы могут быть риски?
 
     ```text
-    The risks are the following:
+        Риски следующие:
 
-    - Loss of life
-    - Loss of business
-    - Loss of reputation
-    - Loss of customers
-    - Loss of employees
+        - Потеря жизни
+        - Потеря бизнеса
+        - Потеря репутации.
+        - Потеря клиентов.
+        - Потеря сотрудников
     ```
 
-At this point, we want to make sure the LLM is correct so we ask it to explain the first risk in more detail and hope it's consistent with the answer above:
+На данном этапе мы хотим убедиться, что LLM правильно поняла вопрос, поэтому мы просим ее подробнее объяснить первый риск и надеемся, что его ответ будет согласован с предыдущим ответом.
 
-> prompt: In a Pandemic, which is the biggest risk and why?
+> Подсказка: Касаемо пандемии, каков самый большой риск и почему?
 
     ```text
-    The biggest risk is loss of life because it's the most important thing to protect.
+    Самый большой риск – это гибель людей, потому что это самое важное, что нужно защитить.
     ```
 
-> What are the two biggest risks in a pandemic?
+> "Каковы два самых больших риска в пандемии?"
 
     ```text
-    The two biggest risks are loss of life and loss of business.
+    Двумя самыми большими рисками являются гибель людей и потеря бизнеса.
     ```
 
-At this point, the LLM is consistent and mentions "life" and "business" as the top two risks. We can now continue to the next step and feel fairly confident. However, we shouldn't trust the LLM blindly, we should always verify the output.
+На этом этапе LLM последовательна и упоминает «жизнь» и «бизнес» как два главных риска. Теперь мы можем перейти к следующему шагу и чувствовать себя достаточно уверенно. Однако мы не должны слепо доверять LLM, мы всегда должны проверять вывод.
 
-## Vary your output
+## Меняйте результат
 
-LLMs are nondeterministic by nature, meaning that you will get different results each time you run the same prompt. Try the following prompt for example:
+LLM недетерминированы по своей природе, а это означает, что вы будете получать разные результаты каждый раз, когда вводите одно и то же. Попробуйте, например, следующую подсказку:
 
-> "Generate code for a Python Web API"
+> "Сгенерируйте код для Python веб-API"
 
     ```text
-    # Import necessary modules
+    # Импорт необходимых модулей
     import flask
     from flask import request, jsonify
 
-    # Create a Flask app
+    # Создание a Flask app
     app = flask.Flask(__name__)
 
-    # Create a route for the API
+    # Создание маршрута для API
     @app.route('/api', methods=['GET'])
     def api():
-        # Get the data from the request
+        # Получение данных от запроса
         data = request.args
 
-        # Process the data
+        # Обработка данных
         result = process_data(data)
 
-        # Return the result as JSON
+        # Возвращение результат в виде JSON
         return jsonify(result)
 
-    # Function to process the data
+    # Функция для обработки данных
     def process_data(data):
-        # Do something with the data
+        # Активно обрабатываем данные
         result = data + 1
 
-        # Return the result
+        # Возвращаем результат
         return result
 
-    # Run the app
+    # Запуск приложения
     if __name__ == '__main__':
         app.run()
 
     ```
 
-Running the same prompt again generates a slightly different response:
+Повторный ввод того же приведет к немного другому ответу:
 
     ```text
-    #import necessary packages
+    #Импорт пакетов
     import flask
     from flask import request, jsonify
 
-    #create the Flask application
+    #Создание Flask приложения
     app = flask.Flask(__name__)
     app.config["DEBUG"] = True
 
-    #create a list of books
+    #Создание списка книг
     books = [
         {'id': 0,
          'title': 'A Fire Upon the Deep',
@@ -388,55 +388,55 @@ Running the same prompt again generates a slightly different response:
          'published': '1975'}
     ]
 
-    #create an endpoint for the API
+    #Создание точки доступа для API
     @app.route('/', methods=['GET'])
     def home():
         return '''<h1>Books API</h1>
     <p>A prototype API for retrieving books.</p>'''
 
-    #create an endpoint to return all books
+    #Создание точки доступа для всех книг
     @app.route('/api/v1/resources/books/all', methods=['GET'])
     def api_all():
         return jsonify(books)
 
-    #create an endpoint to return a single book
+    #Создание точки доступа для одной книги
     @app.route('/api/v1/resources/books', methods=['GET'])
     def api_id():
-        #check if an ID was provided as part of the URL
-        #if ID is provided, assign it to a variable
-        #if no ID is provided, display an error
+        #проверьте, был ли указан идентификатор как часть URL-адреса
+        #если указан идентификатор, присвойте его переменной
+        #если идентификатор не указан, вывести ошибку
         if 'id' in request.args:
             id = int(request.args['id'])
         else:
             return "Error: No id field provided. Please specify an id."
 
-        #create an empty list for our results
+        #создаем пустой список для наших результатов
         results = []
 
-        #loop through the data and match results that fit the requested ID
-        #IDs are unique, but other fields might return many results
+        #проходим по данным и сопоставляем результаты, соответствующие запрошенному идентификатору
+        #ID уникальны, но другие поля могут возвращать много результатов
         for book in books:
             if book['id'] == id:
                 results.append(book)
 
-        #use the jsonify function from Flask to convert our list of
-        #Python dictionaries to the JSON format
+        #используем функцию jsonify из Flask, чтобы преобразовать наш список
+        #Словари Python в формат JSON
         return jsonify(results)
 
     app.run()
     ```
 
-> So is the varied output a problem?
+> Так является ли разнообразие выходных данных проблемой?
 
-Depends on what you're trying to do. If you want a specific response then it's a problem. If you're ok with a varied output like "Generate any 3 questions on geography", then it's not a problem.
+Зависит от того, что вы пытаетесь сделать. Если вы хотите конкретного ответа, то это проблема. Если вас устраивает разнообразный результат, например «Составьте любые 3 вопроса по географии», то это не проблема.
 
-### Using temperature to vary your output
+### Использование температуры для вариативности вывода
 
-Ok, so we've decided we want to limit the output to be more predictable, that is more deterministic. How do we do that?
+Итак, мы решили, что хотим ограничить вывод, чтобы он был более предсказуемым, то есть более детерминированным. Как мы это сделаем?
 
-Temperature is a value between 0 and 1, where 0 is the most deterministic and 1 is the most varied. The default value is 0.7. Let's see what happens with two runs of the same prompt with temperature set to 0.1:
+Температура — это значение от 0 до 1, где 0 — наиболее детерминированный, а 1 — наиболее изменчивый. Значение по умолчанию — 0,7. Давайте посмотрим, что произойдет при двух запусках одного и того же приглашения с температурой, установленной на 0,1:
 
-> "Generate code for a Python Web API"
+> "Создай код для веб-API Python."
 
     ```python
     #import necessary libraries
@@ -472,7 +472,7 @@ Temperature is a value between 0 and 1, where 0 is the most deterministic and 1 
 
     ```
 
-Running the prompt again gives us this outcome:
+Повторный запуск дает нам такой результат:
 
     ```python
     #import necessary libraries
@@ -508,7 +508,7 @@ Running the prompt again gives us this outcome:
 
     ```
 
-There's only a tiny difference between these two outputs. Let's do the opposite this time, let's set the temperature to 0.9:
+Между этими двумя выводами есть лишь небольшая разница. Давайте на этот раз сделаем наоборот, установим температуру 0,9:
 
     ```python
     # Import necessary libraries
@@ -570,27 +570,27 @@ and the second attempt at 0.9 as temperature value:
 
     ```
 
-As you can see, the results couldn't be more varied.
+Как видите, результаты очень разнятся.
 
 > Note, that there are more parameters you can change to vary the output, like top-k, top-p, repetition penalty, length penalty and diversity penalty but these are outside the scope of this curriculum.
 
-## Good practices
+## Передовая практика
 
-There are many practices you can apply to try to get what you want. You will find your own style as you use prompting more and more.
+Существует множество практик, которые вы можете применить, чтобы попытаться получить то, что хотите. Вы найдете свой собственный стиль по мере того, как будете все чаще и чаще использовать подсказки.
 
-Additionally to the techniques we've covered, there are some good practices to consider when prompting an LLM.
+Кроме техник, о которых мы уже говорили, есть несколько хороших практик, которые стоит учесть при использовании подсказок с помощью языковой модели.
 
-Here are some good practices to consider:
+Вот несколько хороших практик, которые стоит рассмотреть:
 
-- **Specify context**. Context matters, the more you can specify like domain, topic, etc. the better.
-- Limit the output. If you want a specific number of items or a specific length, specify it.
-- **Specify both what and how**. Remember to mention both what you want and how you want it, for example "Create a Python Web API with routes products and customers, divide it into 3 files".
-- **Use templates**. Often, you will want to enrich your prompts with data from your company. Use templates to do this. Templates can have variables that you replace with actual data.
-- **Spell correctly**. LLMs might provide you with a correct response, but if you spell correctly, you will get a better response.
+- **Уточните контекст**. Контекст имеет значение, и чем более подробно вы можете указать домен, тему и т.д., тем лучше.
+- **Ограничьте вывод**. Если вам нужно определенное количество элементов или определенная длина, укажите это.
+- **Укажите и что, и как**. Помните упоминать как то, что вы хотите, так и как вы хотите это получить. Например: "Создайте веб-API на Python с маршрутами 'products' и 'customers', разделите его на 3 файла".
+- **Используйте шаблоны**. Часто вам захочется обогатить свои подсказки данными из вашей компании. Для этого используйте шаблоны. Шаблоны могут содержать переменные, которые вы заменяете на актуальные данные.
+- **Правильно пишите слова**. Языковые модели могут предоставить вам правильный ответ, но если вы правильно пишете слова, вы получите более точный ответ.
 
-## Assignment
+## Присвоение
 
-Here's code in Python showing how to build a simple API using Flask:
+Вот код на Python, показывающий, как создать простой API с помощью Flask:
 
     ```python
     from flask import Flask, request
@@ -606,33 +606,33 @@ Here's code in Python showing how to build a simple API using Flask:
         app.run()
     ```
 
-Use an AI assistant like GitHub Copilot or ChatGPT and apply the "self-refine" technique to improve the code.
+Используйте помощника на основе искусственного интеллекта, такого как GitHub Copilot или ChatGPT, и примените метод "самосовершенствования" для улучшения кода.
 
-## Solution
+## Решение
 
-Please attempt to solve the assignment by adding suitable prompts to the code.
+Пожалуйста, попробуйте решить задание, добавляя подходящие подсказки к коду.
 
-> [!TIP]
-> Phrase a prompt to ask it to improve, it's a good idea to limit how many improvements. You can also ask to improve it in a certain way, for example architecture, performance, security, etc.
+> [!СОВЕТ]
+> Сформулируйте подсказку, чтобы попросить улучшить код. Хорошей идеей будет ограничить количество улучшений. Вы также можете попросить улучшить его в определенном аспекте, например, архитектуре, производительности, безопасности и т.д.
 
-[Solution](./python/aoai-solution.py?WT.mc_id=academic-105485-koreyst)
+[Решение](./python/aoai-solution.py?WT.mc_id=academic-105485-koreyst)
 
-## Knowledge check
+## Проверка знаний
 
 Why would I use chain-of-thought prompting? Show me 1 correct response and 2 incorrect responses.
 
-1. To teach the LLM how to solve a problem.
-1. B, To teach the LLM to find errors in code.
-1. C, To instruct the LLM to come up with different solutions.
+1. Научить LLM решать проблемы.
+2. Научить LLM находить ошибки в коде.
+3. Поручить LLM предложить различные решения.
 
-A: 1, because chain-of-thought is about showing the LLM how to solve a problem by providing it with a series of steps, and similar problems and how they were solved.
+Ответ: 1, потому что цепочка мыслей подходит для того, чтобы показать LLM, как решить проблему, предоставив ей ряд шагов, а также похожие проблемы и способы их решения.
 
-## 🚀 Challenge
+## 🚀 Испытание
 
-You just used the self-refine technique in the assignment. Take any program you built and consider what improvements you would want to apply to it. Now use the self-refine technique to apply the proposed changes. What did you think the result, better or worse?
+Вы только что использовали метод самосовершенствования в задании. Возьмите любую программу, которую вы создали, и подумайте, какие улучшения вы бы хотели внести в нее. Теперь используйте метод самосовершенствования, чтобы применить предлагаемые изменения. Что вы думаете о результате? Лучше или хуже?
 
-## Great Work! Continue Your Learning
+## Отличная работа! Продолжайте обучение
 
-After completing this lesson, check out our [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) to continue leveling up your Generative AI knowledge!
+После завершения этого урока ознакомьтесь с нашей [коллекцией для изучения Generative AI](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst), чтобы продолжить совершенствовать свои знания о генеративном искусственном интеллекте!
 
-Head over to Lesson 6 where we will apply our knowledge of Prompt Engineering by [building text generation apps](../06-text-generation-apps/README.md?WT.mc_id=academic-105485-koreyst)
+Переходите к уроку 6, где мы применим наши знания в области проектирования подсказок. [создание приложений для генерации текста](../06-text-generation-apps/README.md?WT.mc_id=academic-105485-koreyst)
