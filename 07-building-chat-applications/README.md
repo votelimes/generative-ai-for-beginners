@@ -1,66 +1,66 @@
-# Building Generative AI-Powered Chat Applications
+# Создание генеративных чат-приложений на базе искусственного интеллекта
 
-[![Building Generative AI-Powered Chat Applications](./images/07-lesson-banner.png?WT.mc_id=academic-105485-koreyst)](https://learn.microsoft.com/_themes/docs.theme/master/en-us/_themes/global/video-embed.html?id=57a31949-67c5-4020-8c85-91e4995589f3?WT.mc_id=academic-105485-koreyst)
+[![Создание генеративных чат-приложений на базе искусственного интеллекта](./images/07-lesson-banner.png?WT.mc_id=academic-105485-koreyst)](https://learn.microsoft.com/_themes/docs.theme/master/en-us/_themes/global/video-embed.html?id=57a31949-67c5-4020-8c85-91e4995589f3?WT.mc_id=academic-105485-koreyst)
 
-> _(Click the image above to view video of this lesson)_
+> _(Нажмите на изображение выше, чтобы просмотреть видео этого урока.)_
 
-Now that we've seen how we can build text-generation apps, let's look into chat applications.
+Теперь, когда мы увидели, как создавать приложения для генерации текста, давайте рассмотрим приложения для чата.
 
-Chat applications have become integrated into our daily lives, offering more than just a means of casual conversation. They're integral parts of customer service, technical support, and even sophisticated advisory systems. It's likely that you've gotten some help from a chat application not too long ago. As we integrate more advanced technologies like generative AI into these platforms, the complexity increases and so does the challenges.
+Чат-приложения стали неотъемлемой частью нашей повседневной жизни, предлагая нам гораздо больше, чем просто возможность неформального общения. Они стали неотъемлемой частью обслуживания клиентов, технической поддержки и даже сложных консультационных систем. Вероятно, вы даже сами недавно вы получали помощь от чат-приложения. По мере интеграции более продвинутых технологий, таких как генеративный искусственный интеллект, возрастает сложность и возникают новые вызовы.
 
-Some questions we need to be answered are:
+Некоторые вопросы, на которые нам нужно ответить:
 
-- **Building the app**. How do we efficiently build and seamlessly integrate these AI-powered applications for specific use cases?
-- **Monitoring**. Once deployed, how can we monitor and ensure that the applications are operating at the highest level of quality, both in terms of functionality and adhering to the [six principles of responsible AI](https://www.microsoft.com/ai/responsible-ai?WT.mc_id=academic-105485-koreyst)?
+- **Создание приложения**. Как эффективно создавать и плавно интегрировать эти приложения, работающие на базе искусственного интеллекта, для конкретных сценариев использования?
+- **Мониторинг**. После развертывания, как мы можем отслеживать и гарантировать, что приложения работают на высоком уровне качества, как с точки зрения функциональности, так и с соблюдением [шести принципов ответственного использования искусственного интеллекта](https://www.microsoft.com/ai/responsible-ai?WT.mc_id=academic-105485-koreyst)?
 
-As we move further into an age defined by automation and seamless human-machine interactions, understanding how generative AI transforms the scope, depth, and adaptability of chat applications becomes essential. This lesson will investigate the aspects of architecture that support these intricate systems, delve into the methodologies for fine-tuning them for domain-specific tasks, and evaluate the metrics and considerations pertinent to ensuring responsible AI deployment.
+По мере продвижения вперед в эпоху, определяемую автоматизацией и беспрепятственным взаимодействием человека с машиной, становится важным понимать, как генеративный искусственный интеллект изменяет область, глубину и адаптивность приложений чатов. В этом уроке будут рассмотрены аспекты архитектуры, которые поддерживают эти сложные системы, рассмотрены методы их настройки для выполнения задач в конкретной области и оценены метрики и соображения, необходимые для обеспечения ответственного развертывания искусственного интеллекта.
 
-## Introduction
+## Введение
 
-This lesson covers:
+Этот урок охватывает:
 
-- Techniques for efficiently building and integrating chat applications.
-- How to apply customization and fine-tuning to applications.
-- Strategies and considerations to effectively monitor chat applications.
+- Методы эффективного создания и интеграции чат-приложений.
+- Как применять кастомизацию и тонкую настройку приложений.
+- Стратегии и соображения по эффективному мониторингу приложений чата.
 
-## Learning Goals
+## Цели обучения
 
-By the end of this lesson, you'll be able to:
+К концу этого урока вы сможете:
 
-- Describe considerations for building and integrating chat applications into existing systems.
-- Customize chat applications for specific use-cases.
-- Identify key metrics and considerations to effectively monitor and maintain the quality of AI-powered chat applications.
-- Ensure chat applications leverage AI responsibly.
+- Описать соображения по созданию и интеграции приложений чата в существующие системы.
+- Настраивайте приложения чата для конкретных случаев использования.
+- Определить ключевые показатели и соображения для эффективного мониторинга и поддержания качества чат-приложений на базе искусственного интеллекта.
+- Обеспечить ответственне использование чатом искусственного интеллекта.
 
-## Integrating Generative AI into Chat Applications
+## Интеграция генеративного искусственного интеллекта в чат-приложения
 
-Elevating chat applications through generative AI isn't only centered around making them smarter; it's about optimizing their architecture, performance, and user interface to deliver a quality user experience. This involves investigating the architectural foundations, API integrations, and user interface considerations. This section aims to offer you a comprehensive roadmap for navigating these complex landscapes, whether you're plugging them into existing systems or building them as stand-alone platforms.
+Повышение уровня чат-приложений с помощью генеративного искусственного интеллекта не сводится только к их интеллектуальному развитию; это также оптимизация их архитектуры, производительности и пользовательского интерфейса для достижения качественного пользовательского опыта. Это включает исследование архитектурных основ, интеграции API и учета пользовательского интерфейса. Данная секция направлена на предоставление вам всесторонней дорожной карты для навигации по этим сложным областям, будь то интеграция в существующие системы или создание автономных платформ.
 
-By the end of this section, you'll be equipped with the expertise needed to efficiently construct and incorporate chat applications.
+К концу этого раздела вы будете обладать знаниями, необходимыми для эффективного создания и внедрения чат-приложений.
 
-### Chatbot or Chat application?
+### Чат-бот или приложение для чата?
 
-Before we dive into building chat applications, let's compare 'chatbots' against 'AI-powered chat applications,' which serve distinct roles and functionalities. A chatbot's main purpose is to automate specific conversational tasks, such as answering frequently asked questions or tracking a package. It's typically governed by rule-based logic or complex AI algorithms. In contrast, an AI-powered chat application is a far more expansive environment designed to facilitate various forms of digital communication, such as text, voice, and video chats among human users. Its defining feature is the integration of a generative AI model that simulates nuanced, human-like conversations, generating responses based on a wide variety of input and contextual cues. A generative AI powered chat application can engage in open-domain discussions, adapt to evolving conversational contexts, and even produce creative or complex dialogue.
+Прежде чем мы начнем создавать чат-приложения, давайте сравним "чатботы" и "чат-приложения, работающие на базе искусственного интеллекта", которые выполняют различные роли и функции. Основная цель чатбота - автоматизировать определенные разговорные задачи, такие как ответы на часто задаваемые вопросы или отслеживание посылок. Обычно он управляется логикой на основе правил или сложными алгоритмами искусственного интеллекта. Чат-приложение же, работающее на базе искусственного интеллекта, является гораздо более масштабной средой, предназначенной для облегчения различных форм цифрового общения, таких как текстовые, голосовые и видеочаты между людьми. Его определяющей особенностью является интеграция генеративной модели искусственного интеллекта, которая симулирует тонкие диалоги, похожие на человеческие, генерируя ответы на основе разнообразных входных данных и контекстуальных подсказок. Чат-приложение, работающее на базе генеративного искусственного интеллекта, способно вести открытые диалоги, адаптироваться к изменяющимся контекстам разговора и даже создавать творческий или сложный диалог.
 
-The table below outlines the key differences and similarities to help us understand their unique roles in digital communication.
+В таблице ниже представлены ключевые различия и сходства, которые помогут нам понять их уникальную роль в цифровой коммуникации.
 
-| Chatbot                               | Generative AI-Powered Chat Application |
-| ------------------------------------- | -------------------------------------- |
-| Task-Focused and rule based           | Context-aware                          |
-| Often integrated into larger systems  | May host one or multiple chatbots      |
-| Limited to programmed functions       | Incorporates generative AI models      |
-| Specialized & structured interactions | Capable of open-domain discussions     |
+| Чатбот                                                | Чат-приложение, работающее на базе генеративного искусственного интеллекта |
+| ----------------------------------------------------- | ---------------------------------------------------------------------------|
+| Ориентирован на задачи и основан на правилах          | Учитывает контекст                                                         |
+| Часто интегрируется в более крупные системы           | Может содержать одного или нескольких чатботов                             |
+| Ограничен программными функциями                      | Включает в себя генеративные модели искусственного интеллекта              |
+| Специализированные и структурированные взаимодействия | Способен на обсуждения в открытой области                                  |
 
-### Leveraging pre-built functionalities with SDKs and APIs
+### Использование предварительно созданных функций с помощью SDK и API
 
-When building a chat application, a great first step is to assess what is already out there. Using SDKs and APIs to build chat applications is an advantageous strategy for a variety of reasons. By integrating well-documented SDKs and APIs, you're strategically positioning your application for long-term success, addressing scalability and maintenance concerns.
+При создании чат-приложения отличным первым шагом является оценка того, что уже существует. Использование SDK и API для создания чат-приложений является выгодной стратегией по различным причинам. Путем интеграции хорошо задокументированных SDK и API вы стратегически позиционируете свое приложение для долгосрочного успеха, учитывая масштабируемость и вопросы обслуживания.
 
-- **Expedites the development process and reduces overhead**: Relying on pre-built functionalities instead of the expensive process of building them yourself allows you to focus on other aspects of your application that you may find more important, such as business logic.
-- **Better performance**: When building functionality from scratch, you'll eventually ask yourself "How does it scale? Is this application capable of handling a sudden influx of users?" Well maintained SDK and APIs often have built in solutions for these concerns.
-- **Easier maintenance**: Updates and improvements are easier to manage as most APIs and SDKs simply require an update to a library when a newer version is released.
-- **Access to cutting edge technology**: Leveraging models that have been fined tuned and trained on extensive datasets provides your application with natural language capabilities.
+- **Ускорение процесса разработки и снижение накладных расходов**: Ориентация на предварительно созданные функции вместо затратного процесса их создания позволяет сосредоточиться на других аспектах вашего приложения, которые вы можете считать более важными, таких как бизнес-логика.
+- **Лучшая производительность**: При создании функциональности с нуля вы в конечном итоге зададите себе вопросы: "Как это масштабируется? Способно ли это приложение справиться с внезапным наплывом пользователей?" Хорошо поддерживаемые SDK и API часто имеют встроенные решения для этих вопросов.
+- **Упрощенное обслуживание**: Обновлениями и улучшениями легче управлять, поскольку большинство API и SDK просто требуют обновления библиотек при выпуске новой версии.
+- **Доступ к передовым технологиям**: Использование моделей, которые были точно настроены и обучены на обширных наборах данных, предоставляют вашему приложению возможности естественного языка.
 
-Accessing functionality of an SDK or API typically involves obtaining permission to use the provided services, which is often through the use of a unique key or authentication token. We'll use the OpenAI Python Library to explore what this looks like. You can also try it out on your own in the following [notebook for OpenAI](./python/oai-assignment.ipynb?WT.mc_id=academic-105485-koreyst) or [notebook for Azure OpenAI Services](./python/aoai-assignment.ipynb?WT.mc_id=academic-105485-koreys) for this lesson.
+Для доступа к функциональности SDK или API обычно требуется получить разрешение на использование предоставляемых сервисов, что часто осуществляется с помощью уникального ключа или аутентификационного токена. Мы будем использовать библиотеку OpenAI для Python, чтобы посмотреть, как это выглядит. Вы также можете попробовать это самостоятельно в следующей [заметке по OpenAI](./python/oai-assignment.ipynb?WT.mc_id=academic-105485-koreyst) или [заметке по Azure OpenAI Services](./python/aoai-assignment.ipynb?WT.mc_id=academic-105485-koreys) для этого урока.
 
 ```python
 import os
@@ -72,94 +72,93 @@ client = OpenAI(
     api_key=API_KEY
     )
 
-chat_completion = client.chat.completions.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": "Suggest two titles for an instructional lesson on chat applications for generative AI."}])
+chat_completion = client.chat.completions.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": "Предложите два названия для учебного урока по чат-приложениям для генеративного ИИ."}])
 ```
 
-The above example uses the GPT-3.5 Turbo model to complete the prompt, but notice that the API key is set prior to doing so. You'd receive an error if you didn't set the key.
+В приведенном выше примере для завершения запроса используется модель GPT-3.5 Turbo, но обратите внимание, что ключ API устанавливается до этого. Вы получите сообщение об ошибке, если не установите ключ.
 
-## User Experience (UX)
+## Пользовательский опыт (User Experience (UX))
 
-General UX principles apply to chat applications, but here are some additional considerations that become particularly important due to the machine learning components involved.
+Общие принципы пользовательского опыта (UX) применимы к чат-приложениям, но в связи с использованием компонентов машинного обучения возникают дополнительные соображения.
 
-- **Mechanism for addressing ambiguity**: Generative AI models occasionally generate ambiguous answers. A feature that allows users to ask for clarification can be helpful should they come across this problem.
-- **Context retention**: Advanced generative AI models have the ability to remember context within a conversation, which can be a necessary asset to the user experience. Giving users the ability to control and manage context improves the user experience, but introduces the risk of retaining sensitive user information. Considerations for how long this information is stored, such as introducing a retention policy, can balance the need for context against privacy.
-- **Personalization**: With the ability to learn and adapt, AI models offer an individualized experience for a user. Tailoring the user experience through features like user profiles not only makes the user feel understood, but it also helps their pursuit of finding specific answers, creating a more efficient and satisfying interaction.
+- **Механизм разрешения неоднозначности:** Генеративные модели искусственного интеллекта иногда могут создавать неоднозначные ответы. Возможность запроса уточнения может быть полезной, если пользователь столкнется с этой проблемой.
+- **Сохранение контекста:** Продвинутые генеративные модели искусственного интеллекта имеют способность запоминать контекст в рамках разговора, что может быть необходимым преимуществом для пользовательского опыта. Предоставление пользователям возможности управлять и контролировать контекст улучшает пользовательский опыт, но влечет риск сохранения чувствительной информации о пользователе. Рассмотрение вопросов хранения этой информации, таких как введение политики хранения, может найти баланс между необходимостью контекста и конфиденциальностью.
+- **Персонализация:** Способность к обучению и адаптации позволяет искусственным интеллект моделям предлагать индивидуализированный опыт для пользователя. Настройка пользовательского опыта с помощью функций, таких как профили пользователей, не только создает ощущение понимания пользователей, но также помогает им в поиске конкретных ответов, что создает более эффективное и удовлетворительное взаимодействие.
 
-One such example of personalization is the "Custom instructions" settings in OpenAI's ChatGPT. It allows you to provide information about yourself that may be important context for your prompts. Here's an example of a custom instruction.
+Один из примеров персонализации - это настройки "Пользовательские инструкции" в ChatGPT от OpenAI. Они позволяют вам предоставить информацию о себе, которая может быть важным контекстом для ваших запросов. Вот пример пользовательской инструкции.
 
-![Custom Instructions Settings in ChatGPT](./images/custom-instructions.png?WT.mc_id=academic-105485-koreyst)
+![Настройки "Пользовательские инструкции" в ChatGPT](./images/custom-instructions.png?WT.mc_id=academic-105485-koreyst)
 
-This "profile" prompts ChatGPT to create a lesson plan on linked lists. Notice that ChatGPT takes into account that the user may want a more in depth lesson plan based on her experience.
+Этот "профиль" побуждает ChatGPT создать план урока по связанным спискам. Обратите внимание, что ChatGPT учитывает, что пользователь может захотеть более подробный план урока, основанный на его опыте.
 
-![A prompt in ChatGPT for a lesson plan about linked lists](./images/lesson-plan-prompt.png?WT.mc_id=academic-105485-koreyst)
+![Подсказка в ChatGPT для плана урока о связанных списках](./images/lesson-plan-prompt.png?WT.mc_id=academic-105485-koreyst)
 
-### Microsoft's System Message Framework for Large Language Models
+### Microsoft System Message Framework для больших языковых моделей
 
-[Microsoft has provided guidance](https://learn.microsoft.com/azure/ai-services/openai/concepts/system-message#define-the-models-output-format?WT.mc_id=academic-105485-koreyst) for writing effective system messages when generating responses from LLMs broken down into 4 areas:
+[Microsoft предоставила рекомендации](https://learn.microsoft.com/azure/ai-services/openai/concepts/system-message#define-the-models-output-format?WT.mc_id=academic-105485-koreyst) для написания эффективных системных сообщений при генерации ответов с помощью LLM, разбитых на 4 области:
 
-1. Defining who the model is for, as well as its capabilities and limitations.
-2. Defining the model's output format.
-3. Providing specific examples that demonstrate intended behavior of the model.
-4. Providing additional behavioral guardrails.
+1. Определение для кого предназначена модель, а также ее возможности и ограничения.
+2. Определение формата вывода модели.
+3. Предоставление конкретных примеров, демонстрирующих предполагаемое поведение модели.
+4. Установка дополнительных ограничений на поведение.
 
-### Accessibility
+### Доступность
 
-Whether a user has visual, auditory, motor, or cognitive impairments, a well-designed chat application should be usable by all. The following list breaks down specific features aimed at enhancing accessibility for various user impairments.
+Независимо от того, есть ли у пользователя нарушения зрения, слуха, двигательных функций или познавательных способностей, хорошо спроектированное чат-приложение должно быть доступным для всех. Вот список конкретных функций, направленных на повышение доступности для различных видов ограничений пользователей.
 
-- **Features for Visual Impairment**: High contrast themes and resizable text, screen reader compatibility.
-- **Features for Auditory Impairment**: Text-to-speech and speech-to-text functions, visual cues for audio notifications.
-- **Features for Motor Impairment**: Keyboard navigation support, voice commands.
-- **Features for Cognitive Impairment**: Simplified language options.
+- **Функции для людей с нарушениями зрения**: высококонтрастные темы и изменяемый размер текста, совместимость с программой чтения с экрана.
+- **Функции для людей с нарушениями слуха**: функции преобразования текста в речь и речи в текст, визуальные подсказки для звуковых уведомлений.
+- **Функции для людей с нарушениями моторики**: поддержка навигации с помощью клавиатуры, голосовые команды.
+- **Функции для когнитивных нарушений**: упрощенные языковые параметры.
 
-## Customization and Fine-tuning for Domain-Specific Language Models
+## Кастомизация и точная настройка для языковых моделей, специализированных для конкретных областей
 
-Imagine a chat application that understands your company's jargon and anticipates the specific queries its user base commonly has. There are a couple of approaches worth mentioning:
+Представьте себе чат-приложение, которое понимает жаргон вашей компании и предугадывает конкретные запросы, которые обычно возникают у его пользователей. Есть несколько подходов:
 
-- **Leveraging DSL models**. DSL stands for domain specific language. You can leverage a so called DSL model trained on a specific domain to understand it's concepts and scenarios.
-- **Apply fine-tuning**. Fine-tuning is the process of further training your model with specific data.
+- **Использование моделей DSL**. DSL означает доменно-ориентированный язык. Вы можете использовать так называемую модель DSL, обученную для конкретного домена, чтобы понять его концепции и сценарии.
+- **Применить тонкую настройку**. Точная настройка — это процесс дальнейшего обучения вашей модели конкретными данными.
 
-## Customization: Using a DSL
+## Кастомизация: использование DSL
 
-Leveraging a domain-specific language models (DSL Models) can enhance user engagement and by providing specialized, contextually relevant interactions. It's a model that is trained or fine-tuned to understand and generate text related to a specific field, industry, or subject. Options for using a DSL model can vary from training one from scratch, to using pre-existing ones through SDKs and APIs. Another option is fine-tuning, which involves taking an existing pre-trained model and adapting it for a specific domain.
+Использование специализированных языковых моделей для определенной области (моделей DSL) может улучшить вовлеченность пользователей, предоставляя специализированные контекстно-релевантные взаимодействия. Это модель, которая обучается или настраивается для понимания и генерации текста, связанного с определенной областью, отраслью или предметом. Варианты использования модели DSL могут варьироваться от обучения с нуля до использования готовых решений через SDK и API. Еще один вариант - точная настройка, которая включает адаптацию существующей предварительно обученной модели для определенной области.
 
-## Customization: Apply fine-tuning
+## Кастомизация: Применение точной настройки
 
-Fine-tuning is often considered when a pre-trained model falls short in a specialized domain or specific task.
+Точная настройка (fine-tuning) часто рассматривается, когда предварительно обученная модель не справляется с задачами в специализированной области или конкретной задачей.
 
-For instance, medical queries are complex and require a lot of context. When a medical professional diagnoses a patient it's based on a variety of factors such as lifestyle or pre-existing conditions, and may even rely on recent medical journals to validate their diagnosis. In such nuanced scenarios, a general-purpose AI chat application cannot be a reliable source.
+Например, медицинские запросы являются сложными и требуют множества контекста. Когда медицинский специалист ставит диагноз пациенту, он основывается на различных факторах, таких как образ жизни или наличие предыдущих заболеваний, и может даже опираться на свежие медицинские журналы для подтверждения своего диагноза. В таких тонких сценариях общего искусственного интеллекта в чат-приложении нельзя рассматривать как надежный источник информации.
 
-### Scenario: a medical application
+### Сценарий: медицинское применение
 
-Consider a chat application designed to assist medical practitioners by providing quick references to treatment guidelines, drug interactions, or recent research findings.
+Рассмотрим чат-приложение, разработанное для помощи медицинским специалистам, предоставляющее быстрый доступ к руководствам по лечению, взаимодействию лекарств или последним научным открытиям.
 
-A general-purpose model might be adequate for answering basic medical questions or providing general advice, but it may struggle with the following:
+Универсальная модель может быть достаточной для ответа на базовые медицинские вопросы или предоставления общих рекомендаций, но она может испытывать трудности с следующим:
 
-- **Highly specific or complex cases**. For example, a neurologist might ask the application, "What are the current best practices for managing drug-resistant epilepsy in pediatric patients?"
-- **Lacking recent advancements**. A general-purpose model could struggle to provide a current answer that incorporates the most recent advancements in neurology and pharmacology.
+- **Очень специфические или сложные случаи.** Например, невролог может задать приложению вопрос: "Каковы текущие лучшие методы управления эпилепсией, устойчивой к лекарствам, у детей?"
+- **Отсутствие последних достижений.** Универсальная модель может испытывать трудности в предоставлении актуального ответа, который учитывает самые последние достижения в нейрологии и фармакологии.
 
-In instances such as these, fine-tuning the model with a specialized medical dataset can significantly improve its ability to handle these intricate medical inquiries more accurately and reliably. This requires access to a large and relevant dataset that represents the domain-specific challenges and questions that need to be addressed.
+В таких случаях точная настройка модели с использованием специализированного медицинского набора данных может значительно улучшить её способность более точно и надёжно обрабатывать такие сложные медицинские запросы. Для этого требуется доступ к большому и соответствующему набору данных, который отражает специфические задачи и вопросы, связанные с конкретной областью.
 
-## Considerations for a High Quality AI-Driven Chat Experience
+## Рекомендации по обеспечению высококачественного чата на основе искусственного интеллекта
 
-This section outlines the criteria for "high-quality" chat applications, which include the capture of actionable metrics and adherence to a framework that responsibly leverages AI technology.
+В данном разделе описываются критерии "высококачественных" чат-приложений, включая сбор действенных метрик и соблюдение фреймворка, ответственно использующего технологии искусственного интеллекта.
 
-### Key Metrics
+### Ключевые метрики
 
-To maintain the high-quality performance an application, it's essential to keep track of key metrics and considerations. These measurements not only ensure the functionality of the application but also assess the quality of the AI model and user experience. Below is a list that covers basic, AI, and user experience metrics to consider.
+Для поддержания высококачественной работы приложения важно отслеживать основные метрики и аспекты. Эти измерения не только обеспечивают функциональность приложения, но также оценивают качество модели и пользовательский опыт. Ниже приведен список основных метрик, метрик искусственного интеллекта и метрик пользовательского опыта, которые следует учитывать.
 
-| Metric                        | Definition                                                                                                             | Considerations for Chat Developer                                         |
+| Метрика                        | Определение                                                                                                             | Рекомендации для разработчиков чата                                         |
 | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| **Uptime**                    | Measures the time the application is operational and accessible by users.                                              | How will you minimize downtime?                                           |
-| **Response Time**             | The time taken by the application to reply to a user's query.                                                          | How can you optimize query processing to improve response time?           |
-| **Precision**                 | The ratio of true positive predictions to the total number of positive predictions                                     | How will you validate the precision of your model?                        |
-| **Recall (Sensitivity)**      | The ratio of true positive predictions to the actual number of positives                                               | How will you measure and improve recall?                                  |
-| **F1 Score**                  | The harmonic mean of precision and recall, that balances the trade-off between both.                                   | What is your target F1 Score? How will you balance precision and recall?  |
-| **Perplexity**                | Measures how well the probability distribution predicted by the model aligns with the actual distribution of the data. | How will you minimize perplexity?                                         |
-| **User Satisfaction Metrics** | Measures the user's perception of the application. Often captured through surveys.                                     | How often will you collect user feedback? How will you adapt based on it? |
-| **Error Rate**                | The rate at which the model makes mistakes in understanding or output.                                                 | What strategies do you have in place to reduce error rates?               |
-| **Retraining Cycles**         | The frequency with which the model is updated to incorporate new data and insights.                                    | How often will you retrain the model? What triggers a retraining cycle?   |
-| **Anomaly Detection**         | Tools and techniques for identifying unusual patterns that do not conform to expected behavior.                        | How will you respond to anomalies?                                        |
-
+| **Время работы** | Измеряет время, в течение которого приложение работает и доступно пользователям. | Как минимизировать время простоя? |
+| **Время отклика** | Время, необходимое приложению для ответа на запрос пользователя. | Как оптимизировать обработку запросов, чтобы сократить время ответа? |
+| **Точность** | Отношение истинно положительных прогнозов к общему количеству положительных прогнозов | Как вы будете проверять точность вашей модели? |
+| **Вспомнить (Чувствительность)** | Отношение истинно положительных прогнозов к фактическому количеству позитивов | Как вы будете измерять и улучшать запоминаемость? |
+| **Оценка F1** | Гармоничное среднее значение точности и полноты, которое уравновешивает компромисс между ними. | Каков ваш целевой показатель F1? Как вы будете балансировать между точностью и отзывом? |
+| **Недоумение** | Измеряет, насколько хорошо предсказанное моделью распределение вероятностей соответствует фактическому распределению данных. | Как свести к минимуму недоумение? |
+| **Показатели удовлетворенности пользователей** | Измеряет восприятие приложения пользователем. Часто фиксируется посредством опросов. | Как часто вы будете собирать отзывы пользователей? Как вы будете адаптироваться на его основе? |
+| **Коэффициент ошибок** | Скорость, с которой модель допускает ошибки в понимании или выводе. | Какие стратегии вы используете для снижения количества ошибок? |
+| **Циклы переподготовки** | Частота обновления модели для включения новых данных и идей. | Как часто вы будете переобучать модель? Что запускает цикл переподготовки? |
+| **Обнаружение аномалий** | Инструменты и методы для выявления необычных закономерностей, не соответствующих ожидаемому поведению. | Как вы будете реагировать на аномалии? |
 ### Implementing Responsible AI Practices in Chat Applications
 
 Microsoft's approach to Responsible AI has identified six principles that should guide AI development and use. Below are the principles, their definition, and things a chat developer should consider and why they should take them seriously.
