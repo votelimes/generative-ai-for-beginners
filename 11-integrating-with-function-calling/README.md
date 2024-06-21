@@ -274,33 +274,33 @@ print(response.choices[0].message)
 }
 ```
 
-Here we can see how the function `search_courses` was called and with what arguments, as listed in the `arguments` property in the JSON response.
+Здесь мы можем увидеть, как функция `search_courses` была вызвана и с какими аргументами, перечисленными в свойстве `arguments` в JSON-ответе.
 
-The conclusion the LLM was able to find the data to fit the arguments of the function as it was extracting it from the value provided to the `messages` parameter in the chat completion call. Below is a reminder of the `messages` value:
+LLM смог найти данные, соответствующие аргументам функции, извлекая их из значения, предоставленного параметру `messages` в вызове `chat.completions`. Ниже приведено напоминание значения `messages`:
 
 ```python
-messages= [ {"role": "user", "content": "Find me a good course for a beginner student to learn Azure."} ]
+messages = [{"role": "user", "content": "Найдите мне хороший курс для начинающего студента по изучению Azure."}]
 ```
 
-As you can see, `student`, `Azure` and `beginner` was extracted from `messages` and set as input to the function. Using functions this way is a great way to extract information from a prompt but also to provide structure to the LLM and have reusable functionality.
+Как видите, `student`, `Azure` и `beginner` были извлечены из `messages` и использованы в качестве входных данных для функции. Использование функций таким образом - отличный способ извлечь информацию из запроса, а также предоставить структуру LLM и иметь возможность повторного использования функциональности.
 
-Next, we need to see how we can use this in our app.
+Далее нам нужно разобраться, как мы можем использовать это в нашем приложении.
 
-## Integrating Function Calls into an Application
+## Интеграция вызовов функций в приложение
 
-After we have tested the formatted response from the LLM, now we can integrate this into an application.
+После того, как мы проверили отформатированный ответ от LLM, мы можем интегрировать его в наше приложение.
 
-### Managing the flow
+### Управление потоком
 
-To integrate this into our application, let's take the following steps:
+Для интеграции этого в наше приложение выполним следующие шаги:
 
-1. First, let's make the call to the Open AI services and store the message in a variable called `response_message`.
+1. Сначала давайте сделаем вызов к сервисам Open AI и сохраняем сообщение в переменной с именем `response_message`.
 
    ```python
    response_message = response.choices[0].message
    ```
 
-1. Now we will define the function that will call the Microsoft Learn API to get a list of courses:
+2. Теперь мы определим функцию, которая будет вызывать API Microsoft Learn для получения списка курсов:
 
    ```python
    import requests
@@ -322,20 +322,20 @@ To integrate this into our application, let's take the following steps:
      return str(results)
    ```
 
-   Note how we now create an actual Python function that maps to the function names introduced in the `functions` variable. We're also making real external API calls to fetch the data we need. In this case, we go against the Microsoft Learn API to search for training modules.
+   Обратите внимание, как мы теперь создаем настоящую функцию на языке Python, которая соответствует именам функций, указанным в переменной `functions`. Мы также делаем реальные внешние вызовы API для получения необходимых данных. В данном случае мы используем API Microsoft Learn для поиска учебных модулей.
 
-Ok, so we created `functions` variables and a corresponding Python function, how do we tell the LLM how to map these two together so our Python function is called?
+Хорошо, мы создали переменные `functions` и соответствующую функцию на языке Python. Как мы сообщаем LLM, как связать их вместе, чтобы наша функция на языке Python была вызвана?
 
-1. To see if we need to call a Python function, we need to look into the LLM response and see if `function_call` is part of it and call the pointed out function. Here's how you can make the mentioned check below:
+3. Чтобы узнать, нужно ли вызывать функцию на языке Python, нам необходимо изучить ответ LLM и узнать, является ли `function_call` его частью, а затем вызвать указанную функцию. Вот как можно выполнить указанную проверку:
 
    ```python
-   # Check if the model wants to call a function
+   # Проверяем, хочет ли модель вызвать функцию
    if response_message.function_call.name:
-    print("Recommended Function call:")
+    print("Рекомендуемый вызов функции:")
     print(response_message.function_call.name)
     print()
 
-    # Call the function.
+    # Вызываем функцию.
     function_name = response_message.function_call.name
 
     available_functions = {
@@ -346,13 +346,13 @@ Ok, so we created `functions` variables and a corresponding Python function, how
     function_args = json.loads(response_message.function_call.arguments)
     function_response = function_to_call(**function_args)
 
-    print("Output of function call:")
+    print("Результат вызова функции:")
     print(function_response)
     print(type(function_response))
 
 
-    # Add the assistant response and function response to the messages
-    messages.append( # adding assistant response to messages
+    # Добавляем ответ ассистента и результат функции в сообщения
+    messages.append( # добавление ответа ассистента в сообщения
         {
             "role": response_message.role,
             "function_call": {
@@ -362,7 +362,7 @@ Ok, so we created `functions` variables and a corresponding Python function, how
             "content": None
         }
     )
-    messages.append( # adding function response to messages
+    messages.append( # добавление результата функции в сообщения
         {
             "role": "function",
             "name": function_name,
@@ -371,7 +371,7 @@ Ok, so we created `functions` variables and a corresponding Python function, how
     )
    ```
 
-   These three lines, ensure we extract the function name, the arguments and make the call:
+   Эти три строки обеспечивают извлечение имени функции, аргументов и вызов функции:
 
    ```python
    function_to_call = available_functions[function_name]
@@ -380,9 +380,9 @@ Ok, so we created `functions` variables and a corresponding Python function, how
    function_response = function_to_call(**function_args)
    ```
 
-   Below is the output from running our code:
+   Ниже приведен вывод при выполнении нашего кода:
 
-   **Output**
+   **Вывод**
 
    ```Recommended Function call:
    {
@@ -401,10 +401,10 @@ Ok, so we created `functions` variables and a corresponding Python function, how
    <class 'str'>
    ```
 
-1. Now we will send the updated message, `messages` to the LLM so we can receive a natural language response instead of an API JSON formatted response.
+4. Теперь мы отправим обновленное сообщение `messages` в LLM, чтобы получить естественный языковый ответ вместо ответа в формате API JSON.
 
    ```python
-   print("Messages in next request:")
+   print("Сообщения в следующем запросе:")
    print(messages)
    print()
 
@@ -414,34 +414,33 @@ Ok, so we created `functions` variables and a corresponding Python function, how
       function_call="auto",
       functions=functions,
       temperature=0
-         )  # get a new response from GPT where it can see the function response
-
+   )  # получаем новый ответ от GPT, где он видит результат функции
 
    print(second_response.choices[0].message)
    ```
 
-   **Output**
+   **Вывод**
 
    ```python
    {
      "role": "assistant",
-     "content": "I found some good courses for beginner students to learn Azure:\n\n1. [Describe concepts of cryptography] (https://learn.microsoft.com/training/modules/describe-concepts-of-cryptography/?WT.mc_id=api_CatalogApi)\n2. [Introduction to audio classification with TensorFlow](https://learn.microsoft.com/training/modules/intro-audio-classification-tensorflow/?WT.mc_id=api_CatalogApi)\n3. [Design a Performant Data Model in Azure SQL Database with Azure Data Studio](https://learn.microsoft.com/training/modules/design-a-data-model-with-ads/?WT.mc_id=api_CatalogApi)\n4. [Getting started with the Microsoft Cloud Adoption Framework for Azure](https://learn.microsoft.com/training/modules/cloud-adoption-framework-getting-started/?WT.mc_id=api_CatalogApi)\n5. [Set up the Rust development environment](https://learn.microsoft.com/training/modules/rust-set-up-environment/?WT.mc_id=api_CatalogApi)\n\nYou can click on the links to access the courses."
+     "content": "Я нашел несколько хороших курсов для начинающих студентов, чтобы изучить Azure:\n\n1. [Описание концепций криптографии] (https://learn.microsoft.com/training/modules/describe-concepts-of-cryptography/?WT.mc_id=api_CatalogApi)\n2. [Введение в классификацию аудио с помощью TensorFlow](https://learn.microsoft.com/training/modules/intro-audio-classification-tensorflow/?WT.mc_id=api_CatalogApi)\n3. [Создание производительной модели данных в Azure SQL Database с использованием Azure Data Studio](https://learn.microsoft.com/training/modules/design-a-data-model-with-ads/?WT.mc_id=api_CatalogApi)\n4. [Начало работы с Microsoft Cloud Adoption Framework для Azure](https://learn.microsoft.com/training/modules/cloud-adoption-framework-getting-started/?WT.mc_id=api_CatalogApi)\n5. [Настройка среды разработки на Rust](https://learn.microsoft.com/training/modules/rust-set-up-environment/?WT.mc_id=api_CatalogApi)\n\nВы можете нажимать на ссылки, чтобы получить доступ к курсам."
    }
 
    ```
 
-## Assignment
+## Задание
 
-To continue your learning of Azure OpenAI Function Calling you can build:
+Для продолжения изучения функционала вызова функций в Azure OpenAI вы можете выполнить следующее:
 
-- More parameters of the function that might help learners find more courses.
-- Create another function call that takes more information from the learner like their native language
-- Create error handling when the function call and/or API call does not return any suitable courses
+- Добавьте больше параметров функции, которые могут помочь учащимся найти больше курсов.
+- Создайте другой вызов функции, который принимает больше информации от учащегося, например, его родной язык.
+- Создайте обработку ошибок, когда вызов функции и/или вызов API не возвращает подходящих курсов.
 
-Hint: Follow the [Learn API reference documentation](https://learn.microsoft.com/training/support/catalog-api-developer-reference?WT.mc_id=academic-105485-koreyst) page to see how and where this data is available.
+Подсказка: Перейдите на страницу [Документация по API каталога Learn](https://learn.microsoft.com/training/support/catalog-api-developer-reference?WT.mc_id=academic-105485-koreyst), чтобы узнать, как и где доступны эти данные.
 
-## Great Work! Continue the Journey
+## Отличная работа! Продолжайте свое путешествие
 
-After completing this lesson, check out our [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) to continue leveling up your Generative AI knowledge!
+После завершения этого урока ознакомьтесь с нашей [коллекцией обучения по генеративному искусственному интеллекту](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst), чтобы продолжить развивать свои знания в области генеративного искусственного интеллекта!
 
-Head over to Lesson 12 where we will look at how to [design UX for AI applications](../12-designing-ux-for-ai-applications/README.md?WT.mc_id=academic-105485-koreyst)!
+Перейдите к Уроку 12, где мы рассмотрим, как [проектировать пользовательский интерфейс для приложений на основе искусственного интеллекта](../12-designing-ux-for-ai-applications/README.md?WT.mc_id=academic-105485-koreyst)!
