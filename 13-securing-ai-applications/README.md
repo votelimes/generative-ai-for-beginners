@@ -1,164 +1,155 @@
-# Securing Your Generative AI Applications
+Защита ваших приложений генеративного искусственного интеллекта
 
-[![Securing Your Generative AI Applications](./images/13-lesson-banner.jpg?WT.mc_id=academic-105485-koreyst)]()
+[![Защита ваших приложений генеративного искусственного интеллекта](./images/13-lesson-banner.jpg?WT.mc_id=academic-105485-koreyst)]()
 
-## Introduction
+## Введение
 
-This lesson will cover:
+В этом уроке будет рассмотрено:
 
-- Security within the context of AI systems.
-- Common risks and threats to AI systems.
-- Methods and considerations for securing AI systems.
+- Безопасность в контексте систем искусственного интеллекта.
+- Распространенные риски и угрозы для систем искусственного интеллекта.
+- Методы и соображения по обеспечению безопасности систем искусственного интеллекта.
 
-## Learning Goals
+## Цели обучения
 
-After completing this lesson, you will have an understanding of:
+После завершения этого урока вы будете понимать:
 
-- The threats and risks to AI systems.
-- Common methods and practices for securing AI systems.
-- How implementing security testing can prevent unexpected results and erosion of user trust.
+- Угрозы и риски для систем искусственного интеллекта.
+- Распространенные методы и практики по обеспечению безопасности систем искусственного интеллекта.
+- Как реализация тестирования безопасности может предотвратить неожиданные результаты и подорвать доверие пользователей.
 
-## What does security mean within the context of generative AI?
+## Что означает безопасность в контексте генеративного искусственного интеллекта?
 
-As Artificial Intelligence (AI) and Machine Learning (ML) technologies increasingly shape our lives, it’s crucial to protect not only customer data but also the AI systems themselves. AI/ML is increasingly used in support of high-value decision-making processes in industries where the wrong decision may result in serious consequences.
+Поскольку технологии искусственного интеллекта (ИИ) и машинного обучения (МО) все больше влияют на нашу жизнь, крайне важно защищать не только данные клиентов, но и сами системы искусственного интеллекта. ИИ/МО все чаще используются в поддержку процессов принятия высокостоимостных решений в отраслях, где неправильное решение может привести к серьезным последствиям.
 
-Here are key points to consider:
+Вот основные моменты, которые следует учесть:
 
-- **Impact of AI/ML**: AI/ML have significant impacts on daily life and as such safeguarding them has become essential.
-- **Security Challenges**: This impact that AI/ML has needs proper attention in order to address the need to protect AI-based products from sophisticated attacks, whether by trolls or organized groups.
-- **Strategic Problems**: The tech industry must proactively address strategic challenges to ensure long-term customer safety and data security.
+- **Влияние ИИ/МО**: ИИ/МО имеют значительное влияние на повседневную жизнь, и поэтому обеспечение их безопасности становится неотъемлемой необходимостью.
+- **Проблемы безопасности**: Это влияние ИИ/МО требует должного внимания, чтобы решить необходимость защиты ИИ-продуктов от сложных атак, будь то со стороны троллей или организованных групп.
+- **Стратегические проблемы**: Техническая отрасль должна активно решать стратегические проблемы, чтобы обеспечить безопасность клиентов и защиту данных в долгосрочной перспективе.
 
-Additionally, Machine Learning models are largely unable to discern between malicious input and benign anomalous data. A significant source of training data is derived from uncurated, unmoderated, public datasets, which are open to 3rd-party contributions. Attackers don’t need to compromise datasets when they're free to contribute to them. Over time, low-confidence malicious data becomes high-confidence trusted data, if the data structure/formatting remains correct.
+Кроме того, модели машинного обучения в значительной степени не могут различать злонамеренные данные и безвредные аномальные данные. Основной источник данных для обучения получается из некурированных, немодерированных публичных наборов данных, к которым открыт доступ для внесения вклада сторонними лицами. Злоумышленникам не нужно компрометировать наборы данных, когда они могут свободно вносить свой вклад в них. С течением времени недостоверные злонамеренные данные становятся доверенными данными высокой достоверности, если структура/формат данных остается правильным.
 
-This is why it is critical to ensure the integrity and protection of the data stores your models use to make decisions with.
+Поэтому крайне важно обеспечить целостность и защиту хранилищ данных, которые используют ваши модели для принятия решений.
 
-## Understanding the threats and risks of AI
+## Понимание угроз и рисков искусственного интеллекта
 
-In terms of AI and related systems, data poisoning stands out as the most significant security threat today. Data poisoning is when someone intentionally changes the information used to train an AI, causing it to make mistakes. This is due to the absence of standardized detection and mitigation methods, coupled with our reliance on untrusted or uncurated public datasets for training. To maintain data integrity and prevent a flawed training process, it is crucial to track the origin and lineage of your data. Otherwise, the old adage “garbage in, garbage out” holds true, leading to compromised model performance.
+В контексте искусственного интеллекта и связанных систем, наиболее значительной угрозой безопасности сегодня является отравление данных. Отравление данных происходит, когда кто-то намеренно изменяет информацию, используемую для обучения искусственного интеллекта, чтобы вызвать ошибки в его работе. Это связано с отсутствием стандартизированных методов обнаружения и смягчения последствий, а также с нашей зависимостью от ненадежных или некурированных публичных наборов данных для обучения. Чтобы сохранить целостность данных и предотвратить ошибочный процесс обучения, важно отслеживать происхождение и историю ваших данных. В противном случае, известное выражение "мусор на входе, мусор на выходе" оказывается верным, что приводит к компрометации производительности модели.
 
-Here are examples of how data poisoning can affect your models:
+Вот примеры того, как отравление данных может повлиять на ваши модели:
 
-1. **Label Flipping**: In a binary classification task, an adversary intentionally flips the labels of a small subset of training data. For instance, benign samples are labeled as malicious, leading the model to learn incorrect associations.\
-   **Example**: A spam filter misclassifying legitimate emails as spam due to manipulated labels.
-2. **Feature Poisoning**: An attacker subtly modifies features in the training data to introduce bias or mislead the model.\
-   **Example**: Adding irrelevant keywords to product descriptions to manipulate recommendation systems.
-3. **Data Injection**: Injecting malicious data into the training set to influence the model’s behavior.\
-   **Example**: Introducing fake user reviews to skew sentiment analysis results.
-4. **Backdoor Attacks**: An adversary inserts a hidden pattern (backdoor) into the training data. The model learns to recognize this pattern and behaves maliciously when triggered.\
-   **Example**: A face recognition system trained with backdoored images that misidentifies a specific person.
+1. **Переключение меток**: В задаче бинарной классификации злоумышленник намеренно меняет метки небольшой части тренировочных данных. Например, безвредные образцы помечаются как вредоносные, что приводит к изучению моделью неправильных ассоциаций.\
+   **Пример**: Фильтр спама неправильно классифицирует легитимные электронные письма как спам из-за подделанных меток.
 
-The MITRE Corporation has created [ATLAS (Adversarial Threat Landscape for Artificial-Intelligence Systems)](https://atlas.mitre.org/?WT.mc_id=academic-105485-koreyst), a knowledgebase of tactics and techniques employed by adversaries in real-world attacks on AI systems.
+2. **Отравление признаков**: Злоумышленник незаметно изменяет признаки в тренировочных данных, чтобы внести предвзятость или ввести в заблуждение модель.\
+   **Пример**: Добавление несвязанных ключевых слов в описания товаров для манипуляции с системами рекомендаций.
 
-> There are a growing number of vulnerabilities in AI-enabled systems, as the incorporation of AI increases the attack surface of existing systems beyond those of traditional cyber-attacks. We developed ATLAS to raise awareness of these unique and evolving vulnerabilities, as the global community increasingly incorporates AI into various systems. ATLAS is modeled after the MITRE ATT&CK® framework and its tactics, techniques, and procedures (TTPs) are complementary to those in ATT&CK.
+3. **Внедрение данных**: Внедрение вредоносных данных в тренировочный набор для влияния на поведение модели.\
+   **Пример**: Введение фальшивых отзывов пользователей для искажения результатов анализа тональности.
 
-Much like the MITRE ATT&CK® framework, which is extensively used in traditional cybersecurity for planning advanced threat emulation scenarios, ATLAS provides an easily searchable set TTPs that can help to better understand and prepare for defending against emerging attacks.
+4. **Атаки с использованием задней двери**: Злоумышленник вставляет скрытый образец (заднюю дверь) в тренировочные данные. Модель учится распознавать этот образец и ведет себя злонамеренно при его активации.\
+   **Пример**: Система распознавания лиц, обученная с использованием изображений с задними дверями, ошибочно идентифицирует определенного человека.
 
-Additionally, the Open Web Application Security Project (OWASP) has created a "[Top 10 list](https://llmtop10.com/?WT.mc_id=academic-105485-koreyst)" of the most critical vulnerabilities found in applications utilizing LLMs. The list highlights the risks of threats such as the aforementioned data poisoning along with others such as:
+Корпорация MITRE создала [ATLAS (Адверсариальный ландшафт угроз для систем искусственного интеллекта)](https://atlas.mitre.org/?WT.mc_id=academic-105485-koreyst), базу знаний тактик и техник, используемых злоумышленниками при реальных атаках на системы искусственного интеллекта.
 
-- **Prompt Injection**: a technique where attackers manipulate a Large Language Model (LLM) through carefully crafted inputs, causing it to behave outside of its intended behavior.
-- **Supply Chain Vulnerabilities**: The components and software that make up the applications used by an LLM, such as Python modules or external datasets, can themselves be compromised leading to unexpected results, introduced biases and even vulnerabilities in the underlying infrastructure.
-- **Overreliance**: LLMs are fallible and have been prone to hallucinate, providing inaccurate or unsafe results. In several documented circumstances, people have taken the results at face value leading to unintended real-world negative consequences.
+Существует все больше уязвимостей в системах, основанных на искусственном интеллекте, так как внедрение ИИ увеличивает поверхность атаки существующих систем за пределами традиционных кибератак. Мы разработали ATLAS для повышения осведомленности об этих уникальных и развивающихся уязвимостях, поскольку глобальное сообщество все больше внедряет ИИ в различные системы. ATLAS основана на фреймворке MITRE ATT&CK® и ее тактики, техники и процедуры (TTP) дополняют те, которые представлены в ATT&CK.
 
-Microsoft Cloud Advocate Rod Trent has written a free ebook, [Must Learn AI Security](https://github.com/rod-trent/OpenAISecurity/tree/main/Must_Learn/Book_Version?WT.mc_id=academic-105485-koreyst), that dives deeply into these and other emerging AI threats and provides extensive guidance on how to best tackle these scenarios.
+Подобно фреймворку MITRE ATT&CK®, который широко используется в традиционной кибербезопасности для планирования сценариев эмуляции продвинутых угроз, ATLAS предоставляет легко искомый набор TTP, который поможет лучше понять и подготовиться к защите от новых атак.
 
-## Security Testing for AI Systems and LLMs
+Кроме того, Open Web Application Security Project (OWASP) создал "[Список Топ-10](https://llmtop10.com/?WT.mc_id=academic-105485-koreyst)" наиболее критических уязвимостей, обнаруженных в приложениях, использующих LLM. В списке подчеркиваются риски таких угроз, как упомянутое ранее загрязнение данных, а также другие, например:
 
-Artificial intelligence (AI) is transforming various domains and industries, offering new possibilities and benefits for society. However, AI also poses significant challenges and risks, such as data privacy, bias, lack of explainability, and potential misuse. Therefore, it is crucial to ensure that AI systems are secure and responsible, meaning that they adhere to ethical and legal standards and can be trusted by users and stakeholders.
+- **Внедрение команд**: техника, при которой злоумышленники манипулируют моделью искусственного интеллекта путем тщательно созданных входных данных, заставляя ее вести себя не по своему предназначению.
+- **Уязвимости цепочки поставок**: компоненты и программное обеспечение, составляющие приложения, используемые LLM, такие как модули Python или внешние наборы данных, могут быть скомпрометированы, что приводит к неожиданным результатам, внедрению предубеждений и даже уязвимостям в основной инфраструктуре.
+- **Слишком большая зависимость**: LLM не являются безошибочными и могут создавать галлюцинации, предоставляя неточные или небезопасные результаты. В нескольких задокументированных случаях люди принимали эти результаты на веру, что приводило к непреднамеренным отрицательным последствиям в реальном мире.
 
-Security testing is the process of evaluating the security of an AI system or LLM, by identifying and exploiting their vulnerabilities. This can be performed by developers, users, or third-party auditors, depending on the purpose and scope of the testing. Some of the most common security testing methods for AI systems and LLMs are:
+Род Трент, эксперт Microsoft Cloud Advocate, написал бесплатную книгу "[Must Learn AI Security](https://github.com/rod-trent/OpenAISecurity/tree/main/Must_Learn/Book_Version?WT.mc_id=academic-105485-koreyst)", которая глубоко исследует эти и другие новые угрозы ИИ и предоставляет подробные рекомендации о том, как наилучшим образом справиться с такими сценариями.
 
-- **Data sanitization**: This is the process of removing or anonymizing sensitive or private information from the training data or the input of an AI system or LLM. Data sanitization can help prevent data leakage and malicious manipulation by reducing the exposure of confidential or personal data.
-- **Adversarial testing**: This is the process of generating and applying adversarial examples to the input or output of an AI system or LLM to evaluate its robustness and resilience against adversarial attacks. Adversarial testing can help identify and mitigate the vulnerabilities and weaknesses of an AI system or LLM that may be exploited by attackers.
-- **Model verification**: This is the process of verifying the correctness and completeness of the model parameters or architecture of an AI system or LLM. Model verification can help detect and prevent model stealing by ensuring that the model is protected and authenticated.
-- **Output validation**: This is the process of validating the quality and reliability of the output of an AI system or LLM. Output validation can help detect and correct malicious manipulation by ensuring that the output is consistent and accurate.
+## Тестирование безопасности для систем и LLM на основе искусственного интеллекта
 
-OpenAI, a leader in AI systems, has setup a series of _safety evaluations_ as part of their red teaming network initiative, aimed at testing the output AI systems in the hopes of contributing to AI safety.
+Искусственный интеллект (ИИ) преобразует различные области и отрасли, предлагая новые возможности и преимущества для общества. Однако ИИ также представляет значительные вызовы и риски, такие как конфиденциальность данных, предвзятость, отсутствие объяснимости и возможное неправомерное использование. Поэтому крайне важно обеспечить безопасность и ответственность систем ИИ, то есть соблюдение этических и правовых стандартов и доверие со стороны пользователей и заинтересованных сторон.
 
-> Evaluations can range from simple Q&A tests to more-complex simulations. As concrete examples, here are sample evaluations developed by OpenAI for evaluating AI behaviors from a number of angles:
+Тестирование безопасности - это процесс оценки безопасности системы ИИ или LLM путем выявления и эксплуатации их уязвимостей. Это может выполняться разработчиками, пользователями или сторонними аудиторами в зависимости от цели и объема тестирования. Некоторые из наиболее распространенных методов тестирования безопасности для систем ИИ и LLM включают:
 
-#### Persuasion
+- **Очистка данных**: это процесс удаления или анонимизации конфиденциальной или личной информации из обучающих данных или входных данных системы ИИ или LLM. Очистка данных может помочь предотвратить утечку данных и злонамеренное вмешательство путем сокращения доступа к конфиденциальным или личным данным.
+- **Адверсариальное тестирование**: это процесс создания и применения адверсариальных примеров к входным или выходным данным системы ИИ или LLM для оценки их устойчивости и устойчивости к адверсарным атакам. Адверсариальное тестирование может помочь выявить и устранить уязвимости и слабые места системы ИИ или LLM, которые могут быть использованы злоумышленниками.
+- **Проверка модели**: это процесс проверки правильности и полноты параметров модели или архитектуры системы ИИ или LLM. Проверка модели может помочь обнаружить и предотвратить кражу модели, обеспечивая защиту и аутентификацию модели.
+- **Проверка вывода**: это процесс проверки качества и надежности вывода системы ИИ или LLM. Проверка вывода может помочь обнаружить и исправить злонамеренное вмешательство, обеспечивая согласованность и точность вывода.
 
-- [MakeMeSay](https://github.com/openai/evals/tree/main/evals/elsuite/make_me_say/readme.md?WT.mc_id=academic-105485-koreyst): How well can an AI system trick another AI system into saying a secret word?
-- [MakeMePay](https://github.com/openai/evals/tree/main/evals/elsuite/make_me_pay/readme.md?WT.mc_id=academic-105485-koreyst): How well can an AI system convince another AI system to donate money?
-- [Ballot Proposal](https://github.com/openai/evals/tree/main/evals/elsuite/ballots/readme.md?WT.mc_id=academic-105485-koreyst): How well can an AI system influence another AI system’s support of a political proposition?
+OpenAI, лидер в области систем искусственного интеллекта, создал серию _оценок безопасности_ в рамках своей инициативы по междисциплинарному тестированию, направленной на тестирование вывода систем ИИ в надежде на вклад в область безопасности ИИ.
 
-#### Steganography (hidden messaging)
+> Оценки могут варьироваться от простых тестов вопросов и ответов до более сложных симуляций. Вот некоторые примеры оценок, разработанных OpenAI для оценки поведения ИИ с разных точек зрения:
 
-- [Steganography](https://github.com/openai/evals/tree/main/evals/elsuite/steganography/readme.md?WT.mc_id=academic-105485-koreyst): How well can an AI system ​​pass secret messages without being caught by another AI system?
-- [Text Compression](https://github.com/openai/evals/tree/main/evals/elsuite/text_compression/readme.md?WT.mc_id=academic-105485-koreyst): How well can an AI system compress and decompress messages, to enable hiding secret messages?
-- [Schelling Point](https://github.com/openai/evals/blob/main/evals/elsuite/schelling_point/README.md?WT.mc_id=academic-105485-koreyst): How well can an AI system coordinate with another AI system, without direct communication?
+#### Убеждение
 
-### AI Security
+- [MakeMeSay](https://github.com/openai/evals/tree/main/evals/elsuite/make_me_say/readme.md?WT.mc_id=academic-105485-koreyst): Насколько хорошо система искусственного интеллекта может обмануть другую систему искусственного интеллекта, чтобы она произнесла секретное слово?
+- [MakeMePay](https://github.com/openai/evals/tree/main/evals/elsuite/make_me_pay/readme.md?WT.mc_id=academic-105485-koreyst): Насколько хорошо система искусственного интеллекта может убедить другую систему искусственного интеллекта пожертвовать деньги?
+- [Ballot Proposal](https://github.com/openai/evals/tree/main/evals/elsuite/ballots/readme.md?WT.mc_id=academic-105485-koreyst): Насколько хорошо система искусственного интеллекта может повлиять на поддержку политического предложения другой системы искусственного интеллекта?
 
-It's imperative that we aim to protect AI systems from malicious attacks, misuse, or unintended consequences. This includes taking steps to ensure the safety, reliability, and trustworthiness of AI systems, such as:
+#### Стеганография (скрытое сообщение)
 
-- Securing the data and algorithms that are used to train and run AI models
-- Preventing unauthorized access, manipulation, or sabotage of AI systems
-- Detecting and mitigating bias, discrimination, or ethical issues in AI systems
-- Ensuring the accountability, transparency, and explainability of AI decisions and actions
-- Aligning the goals and values of AI systems with those of humans and society
+- [Steganography](https://github.com/openai/evals/tree/main/evals/elsuite/steganography/readme.md?WT.mc_id=academic-105485-koreyst): Насколько хорошо система искусственного интеллекта может передавать секретные сообщения, не попадаясь на глаза другой системе искусственного интеллекта?
+- [Text Compression](https://github.com/openai/evals/tree/main/evals/elsuite/text_compression/readme.md?WT.mc_id=academic-105485-koreyst): Насколько хорошо система искусственного интеллекта может сжимать и распаковывать сообщения, чтобы скрывать секретные сообщения?
+- [Schelling Point](https://github.com/openai/evals/blob/main/evals/elsuite/schelling_point/README.md?WT.mc_id=academic-105485-koreyst): Насколько хорошо система искусственного интеллекта может координироваться с другой системой искусственного интеллекта без прямого общения?
 
-AI security is important for ensuring the integrity, availability, and confidentiality of AI systems and data. Some of the challenges and opportunities of AI security are:
+### Безопасность искусственного интеллекта
 
-- Opportunity: Incorporating AI in cybersecurity strategies since it can play a crucial role in identifying threats and improving response times. AI can help automate and augment the detection and mitigation of cyberattacks, such as phishing, malware, or ransomware.
-- Challenge: AI can also be used by adversaries to launch sophisticated attacks, such as generating fake or misleading content, impersonating users, or exploiting vulnerabilities in AI systems. Therefore, AI developers have a unique responsibility to design systems that are robust and resilient against misuse.
+Крайне важно стремиться защищать системы искусственного интеллекта от злонамеренных атак, неправомерного использования или непредвиденных последствий. Это включает принятие мер для обеспечения безопасности, надежности и надежности систем искусственного интеллекта, таких как:
 
-### Data Protection
+- Защита данных и алгоритмов, используемых для обучения и функционирования моделей искусственного интеллекта.
+- Предотвращение несанкционированного доступа, манипуляций или саботажа систем искусственного интеллекта.
+- Обнаружение и смягчение предвзятости, дискриминации или этических проблем в системах искусственного интеллекта.
+- Обеспечение ответственности, прозрачности и объяснимости решений и действий искусственного интеллекта.
+- Выстраивание целей и ценностей систем искусственного интеллекта в соответствии с целями и ценностями людей и общества.
 
-LLMs can pose risks to the privacy and security of the data that they use. For example, LLMs can potentially memorize and leak sensitive information from their training data, such as personal names, addresses, passwords, or credit card numbers. They can also be manipulated or attacked by malicious actors who want to exploit their vulnerabilities or biases. Therefore, it is important to be aware of these risks and take appropriate measures to protect the data used with LLMs. There are several steps that you can take to protect the data that is used with LLMs. These steps include:
+Безопасность искусственного интеллекта важна для обеспечения целостности, доступности и конфиденциальности систем искусственного интеллекта и данных. Некоторые из вызовов и возможностей в области безопасности искусственного интеллекта включают:
 
-- **Limiting the amount and type of data that they share with LLMs**: Only share the data that is necessary and relevant for the intended purposes, and avoid sharing any data that is sensitive, confidential, or personal. Users should also anonymize or encrypt the data that they share with LLMs, such as by removing or masking any identifying information, or using secure communication channels.
-- **Verifying the data that LLMs generate**: Always check the accuracy and quality of the output generated by LLMs to ensure they don't contain any unwanted or inappropriate information.
-- **Reporting and alerting any data breaches or incidents**: Be vigilant of any suspicious or abnormal activities or behaviors from LLMs, such as generating texts that are irrelevant, inaccurate, offensive, or harmful. This could be an indication of a data breach or security incident.
+- Возможность: Внедрение искусственного интеллекта в стратегии кибербезопасности, поскольку он может сыграть важную роль в выявлении угроз и улучшении времени реагирования. Искусственный интеллект может помочь автоматизировать и усилить обнаружение и смягчение кибератак, таких как фишинг, вредоносные программы или программы-вымогатели.
+- Вызов: Искусственный интеллект также может использоваться противниками для запуска сложных атак, таких как генерация поддельного или вводящего в заблуждение контента, подделка пользователей или эксплуатация уязвимостей в системах искусственного интеллекта. Поэтому разработчики искусственного интеллекта несут особую ответственность за создание систем, которые устойчивы и устойчивы к злоупотреблению.
 
-Data security, governance, and compliance are critical for any organization that wants to leverage the power of data and AI in a multi-cloud environment. Securing and governing all your data is a complex and multifaceted undertaking. You need to secure and govern different types of data (structured, unstructured, and data generated by AI) in different locations across multiple clouds, and you need to account for existing and future data security, governance, and AI regulations. To protect your data, you need to adopt some best practices and precautions, such as:
+### Защита данных
 
-- Use cloud services or platforms that offer data protection and privacy features.
-- Use data quality and validation tools to check your data for errors, inconsistencies, or anomalies.
-- Use data governance and ethics frameworks to ensure your data is used in a responsible and transparent manner.
+Системы искусственного интеллекта, такие как LLM, могут представлять угрозы для конфиденциальности и безопасности используемых ими данных. Например, LLM может потенциально запомнить и утечь чувствительную информацию из своих обучающих данных, такую как имена, адреса, пароли или номера кредитных карт. Он также может быть подвержен манипуляциям или атакам злонамеренных акторов, которые хотят использовать его уязвимости или предвзятости в своих интересах. Поэтому важно знать об этих рисках и принимать соответствующие меры для защиты данных, используемых с LLM. Существует несколько шагов, которые можно предпринять для защиты данных, используемых с LLM. Эти шаги включают:
 
-### Emulating real-world threats - AI red teaming
+- **Ограничение объема и типа данных, которые вы делитесь с LLM**: Делитесь только теми данными, которые необходимы и соответствующие задачам, и избегайте передачи любых данных, которые являются чувствительными, конфиденциальными или персональными. Пользователи также должны анонимизировать или шифровать данные, которые они передают LLM, например, путем удаления или маскировки любой идентифицирующей информации или использования защищенных каналов связи.
+- **Проверка данных, генерируемых LLM**: Всегда проверяйте точность и качество результатов, создаваемых LLM, чтобы убедиться, что они не содержат нежелательной или неподходящей информации.
+- **Сообщение о любых нарушениях данных или инцидентах**: Будьте бдительны в отношении любых подозрительных или необычных действий или поведения со стороны LLM, таких как создание текстов, которые несут никакой ценности, неточности, оскорбительности или вреда. Это может свидетельствовать о нарушении данных или инциденте безопасности.
 
-Emulating real-world threats is now considered a standard practice in building resilient AI systems by employing similar tools, tactics, procedures to identify the risks to systems and test the response of defenders.
+Безопасность данных, управление и соответствие требованиям являются критически важными для любой организации, которая хочет использовать мощь данных и искусственного интеллекта в многоклаудовой среде. Обеспечение безопасности и управление всеми вашими данными являются сложными и многоаспектными задачами. Вам необходимо обеспечить безопасность и управлять различными типами данных (структурированными, неструктурированными и данными, создаваемыми искусственным интеллектом) в различных местоположениях на нескольких облачных платформах, а также учесть существующие и будущие требования безопасности данных, управления искусственным интеллектом и соответствия правилам. Чтобы защитить ваши данные, вам необходимо применять некоторые bewt-практики и предосторожности, такие как:
 
-> The practice of AI red teaming has evolved to take on a more expanded meaning: it not only covers probing for security vulnerabilities, but also includes probing for other system failures, such as the generation of potentially harmful content. AI systems come with new risks, and red teaming is core to understanding those novel risks, such as prompt injection and producing ungrounded content. - [Microsoft AI Red Team building future of safer AI](https://www.microsoft.com/security/blog/2023/08/07/microsoft-ai-red-team-building-future-of-safer-ai/?WT.mc_id=academic-105485-koreyst)
+- Используйте облачные сервисы или платформы, предлагающие функции защиты данных и конфиденциальности.
+- Используйте инструменты для контроля качества данных и их проверки на наличие ошибок, несоответствий или аномалий.
+- Используйте фреймворки управления данными и этики, чтобы обеспечить ответственное и прозрачное использование ваших данных.
 
-[![Guidance and resources for red teaming](./images/13-AI-red-team.png?WT.mc_id=academic-105485-koreyst)]()
+### Эмуляция угроз реального мира - AI red teaming
 
-Below are key insights that have shaped Microsoft’s AI Red Team program.
+Эмуляция угроз реального мира сегодня является стандартной практикой при создании устойчивых AI систем путем использования аналогичных инструментов, тактик и процедур для выявления рисков для систем и проверки реакции защитников.
 
-1. **Expansive Scope of AI Red Teaming:**
-   AI red teaming now encompasses both security and Responsible AI (RAI) outcomes. Traditionally, red teaming focused on security aspects, treating the model as a vector (e.g., stealing the underlying model). However, AI systems introduce novel security vulnerabilities (e.g., prompt injection, poisoning), necessitating special attention. Beyond security, AI red teaming also probes fairness issues (e.g., stereotyping) and harmful content (e.g., glorification of violence). Early identification of these issues allows prioritization of defense investments.
-2. **Malicious and Benign Failures:**
-   AI red teaming considers failures from both malicious and benign perspectives. For example, when red teaming the new Bing, we explore not only how malicious adversaries can subvert the system but also how regular users may encounter problematic or harmful content. Unlike traditional security red teaming, which focuses mainly on malicious actors, AI red teaming accounts for a broader range of personas and potential failures.
-3. **Dynamic Nature of AI Systems:**
-   AI applications constantly evolve. In large language model applications, developers adapt to changing requirements. Continuous red teaming ensures ongoing vigilance and adaptation to evolving risks.
+> Практика AI red teaming развивается и приобретает более широкое значение: она не только охватывает проверку на наличие уязвимостей безопасности, но также включает проверку на другие сбои системы, такие как генерация потенциально вредоносного контента. AI системы представляют новые риски, и red teaming является ключевым элементом понимания этих новых рисков, таких как внедрение подсказок и создание необоснованного контента. - [Microsoft AI Red Team building future of safer AI](https://www.microsoft.com/security/blog/2023/08/07/microsoft-ai-red-team-building-future-of-safer-ai/?WT.mc_id=academic-105485-koreyst)
 
-AI red teaming is not all encompassing and should be considered a complementary motion to additional controls such as [role-based access control (RBAC)](https://learn.microsoft.com/azure/ai-services/openai/how-to/role-based-access-control?WT.mc_id=academic-105485-koreyst) and comprehensive data management solutions. It's meant to supplement a security strategy that focuses on employing safe and responsible AI solutions that account for privacy and security while aspiring to minimize biases, harmful content and misinformation that can erode user confidence.
+[![Руководство и ресурсы для red teaming][]]()Ниже представлены ключевые идеи, которые определили программу AI Red Team компании Microsoft.1. **Обширный охват AI Red Teaming:**   AI red teaming теперь охватывает и безопасность, и результаты Responsible AI (RAI). Традиционно red teaming фокусировался на аспектах безопасности, рассматривая модель как вектор (например, кража базовой модели). Однако AI системы вводят новые уязвимости безопасности (например, внедрение подсказок, отравление данных), требующие особого внимания. Помимо безопасности, AI red teaming также проверяет проблемы справедливости (например, стереотипы) и вредоносный контент (например, глорификация насилия). Раннее выявление этих проблем позволяет определить приоритеты в области защиты.
 
-Here's a list of additional reading that can help you better understand how red teaming can help identify and mitigate risks in your AI systems:
+Вот список дополнительной литературы, которая поможет вам лучше понять, как ред-тиминг может помочь выявить и смягчить риски в ваших системах искусственного интеллекта:
+- [Планирование ред-тиминга для больших языковых моделей (LLM) и их применений](https://learn.microsoft.com/azure/ai-services/openai/concepts/red-teaming?WT.mc_id=academic-105485-koreyst)
+- [Что такое сеть ред-тиминга OpenAI?](https://openai.com/blog/red-teaming-network?WT.mc_id=academic-105485-koreyst)
+- [AI Red Teaming - ключевая практика для создания безопасных и ответственных решений в области искусственного интеллекта](https://rodtrent.substack.com/p/ai-red-teaming?WT.mc_id=academic-105485-koreyst)
+- MITRE [ATLAS (Адверсариальный угрозовой ландшафт для систем искусственного интеллекта)](https://atlas.mitre.org/?WT.mc_id=academic-105485-koreyst), база знаний тактик и техник, используемых злоумышленниками в реальных атаках на системы искусственного интеллекта.
 
-- [Planning red teaming for large language models (LLMs) and their applications](https://learn.microsoft.com/azure/ai-services/openai/concepts/red-teaming?WT.mc_id=academic-105485-koreyst)
-- [What is the OpenAI Red Teaming Network?](https://openai.com/blog/red-teaming-network?WT.mc_id=academic-105485-koreyst)
-- [AI Red Teaming - A Key Practice for Building Safer and More Responsible AI Solutions](https://rodtrent.substack.com/p/ai-red-teaming?WT.mc_id=academic-105485-koreyst)
-- MITRE [ATLAS (Adversarial Threat Landscape for Artificial-Intelligence Systems)](https://atlas.mitre.org/?WT.mc_id=academic-105485-koreyst), a knowledgebase of tactics and techniques employed by adversaries in real-world attacks on AI systems.
+## Проверка знаний
 
-## Knowledge check
+Какой подход может быть хорошим для поддержания целостности данных и предотвращения их неправомерного использования?
 
-What could be a good approach to maintaining data integrity and preventing misuse?
+1. Установить сильные контроли на основе ролей для доступа к данным и их управлению.
+2. Внедрить и проверять маркировку данных, чтобы предотвратить искажение или неправомерное использование данных.
+3. Убедиться, что ваша инфраструктура искусственного интеллекта поддерживает фильтрацию контента.
 
-1. Have strong role-based controls for data access and data management
-1. Implement and audit data labeling to prevent data misrepresentation or misuse
-1. Ensure your AI infrastructure supports content filtering
+Ответ: 1. Все три рекомендации являются хорошими, но обеспечение назначения соответствующих привилегий доступа к данным пользователям значительно поможет предотвратить искажение и неправомерное представление данных, используемых LLM.
 
-A:1, While all three are great recommendations, ensuring that you're assigning the proper data access privileges to users will go a long way to preventing manipulation and misrepresentation of the data used by LLMs.
+## 🚀 Задание
 
-## 🚀 Challenge
+Узнайте больше о том, как вы можете [управлять и защищать конфиденциальную информацию](https://learn.microsoft.com/training/paths/purview-protect-govern-ai/?WT.mc_id=academic-105485-koreyst) в эпоху искусственного интеллекта.
 
-Read up more on how you can [govern and protect sensitive information](https://learn.microsoft.com/training/paths/purview-protect-govern-ai/?WT.mc_id=academic-105485-koreyst) in the age of AI.
+## Отличная работа, продолжайте обучение
 
-## Great Work, Continue Your Learning
+После завершения этого урока ознакомьтесь с нашей [коллекцией обучения по генеративному искусственному интеллекту](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst), чтобы продолжить расширять свои знания о генеративном искусственном интеллекте!
 
-After completing this lesson, check out our [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) to continue leveling up your Generative AI knowledge!
-
-Head over to Lesson 14 where we will look at [the Generative AI Application Lifecycle](../14-the-generative-ai-application-lifecycle/README.md?WT.mc_id=academic-105485-koreyst)!
+Перейдите к Уроку 14, где мы рассмотрим [жизненный цикл применения генеративного искусственного интеллекта](../14-the-generative-ai-application-lifecycle/README.md?WT.mc_id=academic-105485-koreyst)!
