@@ -1,90 +1,90 @@
-# Retrieval Augmented Generation (RAG) and Vector Databases
+# Retrieval Augmented Generation (RAG) и векторные базы данных
 
 <!-- ![chapter image](./images/) -->
 
-In the search applications lesson, we briefly learned how to integrate your own data into Large Language Models (LLMs). In this lesson, we will delve further into the concepts of grounding your data in your LLM application, the mechanics of the process and the methods for storing data, including both embeddings and text.
+В уроке по поисковым приложениям мы кратко узнали, как интегрировать собственные данные в большие языковые модели (LLM). В этом уроке мы более подробно рассмотрим концепцию закрепления ваших данных в вашем приложении на основе LLM, механику этого процесса и методы хранения данных, включая векторные представления и текст.
 
-> **Video Coming Soon**
+> **Видео скоро появится**
 
-## Introduction
+## Введение
 
-In this lesson we will cover the following:
+В этом уроке мы рассмотрим следующие вопросы:
 
-- An introduction to RAG, what it is and why it is used in AI (artificial intelligence).
+- Введение в RAG, что это такое и почему это используется в искусственном интеллекте (ИИ).
 
-- Understanding what vector databases are and creating one for our application.
+- Понимание, что такое векторные базы данных и создание одной для нашего приложения.
 
-- A practical example on how to integrate RAG into an application.
+- Практический пример интеграции RAG в приложение.
 
-## Learning Goals
+## Цели обучения
 
-After completing this lesson, you will be able to:
+После завершения этого урока вы сможете:
 
-- Explain the significance of RAG in data retrieval and processing.
+- Объяснить значение RAG в поиске и обработке данных.
 
-- Setup RAG application and ground your data to an LLM
+- Настроить приложение RAG и закрепить ваши данные в LLM.
 
-- Effective integration of RAG and Vector Databases in LLM Applications.
+- Эффективно интегрировать RAG и векторные базы данных в приложениях LLM.
 
-## Our Scenario: enhancing our LLMs with our own data
+## Наш сценарий: улучшение LLM с помощью собственных данных
 
-For this lesson, we want to add our own notes into the education startup, which allows the chatbot to get more information on the different subjects. Using the notes that we have, learners will be able to study better and understand the different topics, making it easier to revise for their examinations. To create our scenario, we will use:
+В этом уроке мы хотим добавить свои собственные заметки в образовательный стартап, чтобы чат-бот мог получать больше информации по разным предметам. Используя имеющиеся заметки, учащиеся смогут лучше изучать материал и понимать различные темы, что облегчит подготовку к экзаменам. Для создания нашего сценария мы будем использовать следующие компоненты:
 
-- `Azure OpenAI:` the LLM we will use to create our chatbot
+- `Azure OpenAI`: LLM, который мы будем использовать для создания нашего чат-бота.
 
-- `AI for beginners' lesson on Neural Networks`: this will be the data we ground our LLM on
+- `Урок "Искусственные нейронные сети для начинающих"`: это будут данные, на которых мы закрепим наш LLM.
 
-- `Azure AI Search` and `Azure Cosmos DB:` vector database to store our data and create a search index
+- `Azure AI Search` и `Azure Cosmos DB`: векторная база данных для хранения наших данных и создания поискового индекса.
 
-Users will be able to create practice quizzes from their notes, revision flash cards and summarize it to concise overviews. To get started, let us look at what is RAG and how works:
+Пользователи смогут создавать практические викторины на основе своих заметок, карточки для повторения и получать краткие обзоры материала. Чтобы начать, давайте рассмотрим, что такое RAG и как оно работает:
 
 ## Retrieval Augmented Generation (RAG)
 
-An LLM powered chatbot processes user prompts to generate responses. It is designed to be interactive and engages with users on a wide array of topics. However, its responses are limited to the context provided and its foundational training data. For instance, GPT-4 knowledge cutoff is September 2021, meaning, it lacks knowledge of events that have occurred after this period. In addition, the data used to train LLMs excludes confidential information such as personal notes or a company's product manual.
+Восстановление сгенерированной информации (Retrieval Augmented Generation, RAG) - это метод, при котором чат-бот на основе модели глубокого обучения обрабатывает запросы пользователей и генерирует ответы. Он разработан для интерактивного общения с пользователями по широкому спектру тем. Однако его ответы ограничены предоставленным контекстом и фундаментальными данными, на которых он был обучен. Например, модель GPT-4 имеет ограничение по знаниям, полученным к сентябрю 2021 года, что означает, что у нее нет информации о событиях, произошедших после этого периода. Кроме того, данные, используемые для обучения моделей глубокого обучения, исключают конфиденциальную информацию, такую как личные заметки или руководство по продукту компании.
 
-### How RAGs (Retrieval Augmented Generation) work
+### Как работают модели RAG (Retrieval Augmented Generation)
 
-![drawing showing how RAGs work](images/how-rag-works.png?WT.mc_id=academic-105485-koreyst)
+![схема, показывающая работу моделей RAG](images/how-rag-works.png?WT.mc_id=academic-105485-koreyst)
 
-Suppose you want to deploy a chatbot that creates quizzes from your notes, you will require a connection to the knowledge base. This is where RAG comes to the rescue. RAGs operate as follows:
+Предположим, вы хотите развернуть чат-бота, который создает викторины на основе ваших заметок. Для этого вам потребуется подключение к базе знаний. И здесь на помощь приходит RAG. Модели RAG работают следующим образом:
 
-- **Knowledge base:** Before retrieval, these documents need to be ingested and preprocessed, typically breaking down large documents into smaller chunks, transforming them to text embedding and storing them in a database.
+- **База знаний:** Перед извлечением информации эти документы должны быть обработаны и предварительно подготовлены. Обычно они разбиваются на более мелкие части, преобразуются в текстовое представление и сохраняются в базе данных.
 
-- **User Query:** the user asks a question
+- **Запрос пользователя:** Пользователь задает вопрос.
 
-- **Retrieval:** When a user asks a question, the embedding model retrieves relevant information from our knowledge base to provide more context that will be incorporated into the prompt.
+- **Извлечение информации:** Когда пользователь задает вопрос, модель сопоставления извлекает соответствующую информацию из базы знаний, чтобы предоставить дополнительный контекст, который будет включен в запрос.
 
-- **Augmented Generation:** the LLM enhances its response based on the data retrieved. It allows the response generated to be not only based on pre-trained data but also relevant information from the added context. The retrieved data is used to augment the LLM's responses. The LLM then returns an answer to the user's question.
+- **Улучшение генерации:** Модель LLM улучшает свой ответ на основе полученных данных. Это позволяет сгенерированному ответу не только основываться на предварительно обученных данных, но также на актуальной информации из добавленного контекста. Извлеченные данные используются для улучшения ответов модели LLM. Затем модель LLM возвращает ответ на вопрос пользователя.
 
-![drawing showing how RAGs architecture](images/encoder-decode.png?WT.mc_id=academic-105485-koreyst)
+![рисунок, показывающий архитектуру RAG](images/encoder-decode.png?WT.mc_id=academic-105485-koreyst)
 
-The architecture for RAGs is implemented using transformers consisting of two parts: an encoder and a decoder. For example, when a user asks a question, the input text 'encoded' into vectors capturing the meaning of words and the vectors are 'decoded' into our document index and generates new text based on the user query. The LLM uses both an encoder-decoder model to generate the output.
+Архитектура моделей RAG реализована с использованием трансформеров, состоящих из двух частей: энкодера и декодера. Например, когда пользователь задает вопрос, входной текст "кодируется" в векторы, которые захватывают смысл слов, а затем эти векторы "декодируются" в наш индекс документов и генерируют новый текст на основе запроса пользователя. Модель LLM использует энкодер-декодер для генерации выходных данных.
 
-Two approaches when implementing RAG according to the proposed paper: [Retrieval-Augmented Generation for Knowledge intensive NLP (natural language processing software) Tasks](https://arxiv.org/pdf/2005.11401.pdf?WT.mc_id=academic-105485-koreyst) are:
+Два подхода при внедрении RAG согласно предлагаемому документу: [Поисково-дополненная генерация для наукоемких задач НЛП (программного обеспечения обработки естественного языка)](https://arxiv.org/pdf/2005.11401.pdf?WT.mc_id=academic-105485-koreyst) are:
 
-- **_RAG-Sequence_** using retrieved documents to predict the best possible answer to a user query
+- **RAG-Sequence** использует извлеченные документы для предсказания наилучшего возможного ответа на запрос пользователя.
 
-- **RAG-Token** using documents to generate the next token, then retrieve them to answer the user's query
+- **RAG-Token** использует документы для генерации следующего токена, а затем извлекает их, чтобы ответить на вопрос пользователя.
 
-### Why would you use RAGs? 
+### Почему использовать модели RAG?
 
-- **Information richness:** ensures text responses are up to date and current. It, therefore, enhances performance on domain specific tasks by accessing the internal knowledge base.
+- **Информационная насыщенность:** обеспечивает актуальность и актуальность текстовых ответов. Таким образом, модели RAG повышают производительность в задачах, связанных с конкретной областью, путем доступа к внутренней базе знаний.
 
-- Reduces fabrication by utilizing **verifiable data** in the knowledge base to provide context to the user queries.
+- Снижает создание фальсификаций, используя **проверяемые данные** в базе знаний для предоставления контекста для запросов пользователей.
 
-- It is **cost effective** as they are more economical compared to fine-tuning an LLM
+- Это **экономически эффективно**, поскольку модели RAG более экономичны по сравнению с тонкой настройкой моделей LLM.
 
-## Creating a knowledge base
+## Создание базы знаний
 
-Our application is based on our personal data i.e., the Neural Network lesson on AI For Beginners curriculum.
+Наше приложение основано на наших собственных данных, а именно, на уроке по нейронным сетям в программе "Искусственный интеллект для начинающих".
 
-### Vector Databases
+### Векторные базы данных
 
-A vector database, unlike traditional databases, is a specialized database designed to store, manage and search embedded vectors. It stores numerical representations of documents. Breaking down data to numerical embeddings makes it easier for our AI system to understand and process the data.
+Векторная база данных, в отличие от традиционных баз данных, является специализированной базой данных, разработанной для хранения, управления и поиска векторных представлений. Она хранит числовые представления документов. Разбиение данных на числовые вложения облегчает понимание и обработку данных нашей системой искусственного интеллекта.
 
-We store our embeddings in vector databases as LLMs have a limit of the number of tokens they accept as input. As you cannot pass the entire embeddings to an LLM, we will need to break them down into chunks and when a user asks a question, the embeddings most like the question will be returned together with the prompt. Chunking also reduces costs on the number of tokens passed through an LLM.
+Мы храним наши вложения в векторных базах данных, поскольку модели LLM имеют ограничение на количество токенов, которые они могут принимать на вход. Так как невозможно передать все вложения в модель LLM, нам необходимо разбить их на части, и когда пользователь задает вопрос, вложения, наиболее подходящие для этого вопроса, будут возвращены вместе с запросом. Разделение также снижает расходы на количество токенов, проходящих через модель LLM.
 
-Some popular vector databases include Azure Cosmos DB, Clarifyai, Pinecone, Chromadb, ScaNN, Qdrant and DeepLake. You can create an Azure Cosmos DB model using Azure CLI with the following command:
+Некоторые популярные векторные базы данных включают Azure Cosmos DB, Clarifyai, Pinecone, Chromadb, ScaNN, Qdrant и DeepLake. Вы можете создать модель Azure Cosmos DB с помощью Azure CLI с помощью следующей команды:
 
 ```bash
 az login
@@ -93,9 +93,9 @@ az cosmosdb create -n <cosmos-db-name> -r <resource-group-name>
 az cosmosdb list-keys -n <cosmos-db-name> -g <resource-group-name>
 ```
 
-### From text to embeddings
+### От текста к вложениям
 
-Before we store our data, we will need to convert it to vector embeddings before it is stored in the database. If you are working with large documents or long texts, you can chunk them based on queries you expect. Chunking can be done at sentence level, or at a paragraph level. As chunking derives meanings from the words around them, you can add some other context to a chunk, for example, by adding the document title or including some text before or after the chunk. You can chunk the data as follows:
+Прежде чем мы сохраняем наши данные, нам нужно преобразовать их в векторные вложения, которые будут храниться в базе данных. Если вы работаете с большими документами или длинными текстами, вы можете разделить их на фрагменты в соответствии с ожидаемыми запросами. Разделение можно выполнить на уровне предложений или на уровне абзацев. Поскольку разделение извлекает значения из слов вокруг них, вы можете добавить к фрагменту некоторый другой контекст, например, добавив заголовок документа или включив некоторый текст перед или после фрагмента. Вы можете выполнить разделение данных следующим образом:
 
 ```python
 def split_text(text, max_length, min_length):
@@ -109,70 +109,70 @@ def split_text(text, max_length, min_length):
             chunks.append(' '.join(current_chunk))
             current_chunk = []
 
-    # If the last chunk didn't reach the minimum length, add it anyway
+   # Если последний фрагмент не достиг минимальной длины, все равно добавьте его
     if current_chunk:
         chunks.append(' '.join(current_chunk))
 
     return chunks
 ```
 
-Once chunked, we can then embed our text using different embedding models. Some models you can use include: word2vec, ada-002 by OpenAI, Azure Computer Vision and many more. Selecting a model to use will depend on the languages you're using, the type of content encoded (text/images/audio), the size of input it can encode and length of the embedding output.
+После разделения данных на фрагменты мы можем преобразовать наш текст с использованием различных моделей вложений. Некоторые модели, которые вы можете использовать, включают word2vec, ada-002 от OpenAI, Azure Computer Vision и многие другие. Выбор модели зависит от используемых языков, типа закодированного контента (текст/изображения/аудио), размера входных данных, которые она может обработать, и длины вывода вложения.
 
-An example of embedded text using OpenAI's `text-embedding-ada-002` model is:
-![an embedding of the word cat](images/cat.png?WT.mc_id=academic-105485-koreyst)
+Пример вложенного текста с использованием модели `text-embedding-ada-002` от OpenAI:
+![вложение слова "cat"](images/cat.png?WT.mc_id=academic-105485-koreyst)
 
-## Retrieval and Vector Search
+## Извлечение и поиск по векторам
 
-When a user asks a question, the retriever transforms it into a vector using the query encoder, it then searches the through our document search index for relevant vectors in the document that are related to the input. Once done, it converts both the input vector and document vectors into text and passes it through the LLM.
+Когда пользователь задает вопрос, извлекатель преобразует его в вектор с помощью кодировщика запроса, затем ищет в нашем индексе поиска документов соответствующие векторы, связанные с входными данными. После этого он преобразует как входной вектор, так и векторы документов в текст и передает их модели LLM.
 
-### Retrieval
+### Извлечение
 
-Retrieval happens when the system tries to quickly find the documents from the index that satisfy the search criteria. The goal of the retriever is to get documents that will be used to provide context and ground the LLM on your data.
+Извлечение происходит, когда система пытается быстро найти документы в индексе, удовлетворяющие критериям поиска. Целью извлекателя является получение документов, которые будут использоваться для предоставления контекста и базового знания модели LLM на основе ваших данных.
 
-There are several ways to perform search within our database such as:
+Существует несколько способов выполнения поиска в нашей базе данных:
 
-- **Keyword search** - used for text searches
+- **Поиск по ключевым словам** - используется для текстовых запросов.
 
-- **Semantic search** - uses the semantic meaning of words
+- **Семантический поиск** - использует семантическое значение слов.
 
-- **Vector search** - converts documents from text to vector representations using embedding models. Retrieval will be done by querying the documents whose vector representations are closest to the user question.
+- **Поиск по векторам** - преобразует документы из текста в векторные представления с использованием моделей вложений. Извлечение будет осуществляться путем запроса документов, векторные представления которых наиболее близки к вопросу пользователя.
 
-- **Hybrid** - a combination of both keyword and vector search.
+- **Гибридный поиск** - комбинация поиска по ключевым словам и поиска по векторам.
 
-A challenge with retrieval comes in when there is no similar response to the query in the database, the system will then return the best information they can get, however, you can use tactics like set up the maximum distance for relevance or use hybrid search that combines both keywords and vector search. In this lesson we will use hybrid search, a combination of both vector and keyword search. We will store our data into a dataframe with columns containing the chunks as well as embeddings.
+Одной из проблем с извлечением является отсутствие подходящего ответа на запрос в базе данных. В этом случае система вернет наилучшую информацию, которую сможет получить. Однако вы можете использовать тактики, такие как установка максимального расстояния для определения релевантности или использование гибридного поиска, который объединяет как поиск по ключевым словам, так и поиск по векторам. В этом уроке мы будем использовать гибридный поиск, комбинируя поиск по векторам и по ключевым словам. Мы будем хранить наши данные в таблице с колонками, содержащими фрагменты и вложения.
 
-### Vector Similarity
+### Сходство векторов
 
-The retriever will search through the knowledge database for embeddings that are close together, the closest neighbour, as they are texts that are similar. In the scenario a user asks a query, it is first embedded then matched with similar embeddings. The common measurement that is used to find how similar different vectors are is cosine similarity which is based on the angle between two vectors.
+Извлекатель будет искать в базе знаний вложения, которые находятся близко друг к другу, как ближайшие соседи, поскольку это тексты, которые похожи между собой. В сценарии, когда пользователь задает запрос, он сначала преобразуется в вложение, а затем сопоставляется с похожими вложениями. Обычно для определения степени сходства между различными векторами используется косинусная схожесть, основанная на угле между двумя векторами.
 
-We can measure similarity using other alternatives we can use are Euclidean distance which is the straight line between vector endpoints and dot product which measures the sum of the products of corresponding elements of two vectors.
+Мы также можем измерять сходство с помощью других альтернативных методов, таких как евклидово расстояние, которое представляет собой прямую линию между конечными точками векторов, и скалярное произведение, которое измеряет сумму произведений соответствующих элементов двух векторов.
 
-### Search index
+### Индекс поиска
 
-When doing retrieval, we will need to build a search index for our knowledge base before we perform search. An index will store our embeddings and can quickly retrieve the most similar chunks even in a large database. We can create our index locally using:
+При выполнении извлечения нам потребуется создать индекс поиска для нашей базы знаний перед выполнением поиска. Индекс будет хранить наши вложения и сможет быстро извлекать наиболее похожие фрагменты, даже в большой базе данных. Мы можем создать наш индекс локально, используя следующий код на языке Python:
 
 ```python
 from sklearn.neighbors import NearestNeighbors
 
 embeddings = flattened_df['embeddings'].to_list()
 
-# Create the search index
+# Создаем индекс поиска
 nbrs = NearestNeighbors(n_neighbors=5, algorithm='ball_tree').fit(embeddings)
 
-# To query the index, you can use the kneighbors method
+# Для запроса к индексу можно использовать метод kneighbors
 distances, indices = nbrs.kneighbors(embeddings)
 ```
 
-### Re-ranking
+### Переупорядочивание
 
-Once you have queried the database, you might need to sort the results from the most relevant. A reranking LLM utilizes Machine Learning to improve the relevance of search results by ordering them from the most relevant. Using Azure AI Search, reranking is done automatically for you using a semantic reranker. An example of how reranking works using nearest neighbours:
+После выполнения запроса к базе данных может потребоваться отсортировать результаты по наиболее релевантным. Модель переупорядочивания LLM использует методы машинного обучения для улучшения релевантности результатов поиска путем их упорядочивания от наиболее релевантных. Если вы используете Azure AI Search, переупорядочивание будет выполняться автоматически с помощью семантического переупорядочивателя. Вот пример того, как работает переупорядочивание с использованием ближайших соседей:
 
 ```python
-# Find the most similar documents
+# Находим наиболее похожие документы
 distances, indices = nbrs.kneighbors([query_vector])
 
 index = []
-# Print the most similar documents
+# Выводим наиболее похожие документы
 for i in range(3):
     index = indices[0][i]
     for index in indices[0]:
@@ -180,38 +180,38 @@ for i in range(3):
         print(flattened_df['path'].iloc[index])
         print(flattened_df['distances'].iloc[index])
     else:
-        print(f"Index {index} not found in DataFrame")
+        print(f"Индекс {index} не найден в DataFrame")
 ```
 
-## Bringing it all together
+## Объединение всех элементов вместе
 
-The last step is adding our LLM into the mix to be able to get responses that are grounded on our data. We can implement it as follows:
+Последний шаг - добавление нашей LLM в процесс, чтобы получать ответы, основанные на наших данных. Мы можем реализовать это следующим образом:
 
 ```python
-user_input = "what is a perceptron?"
+user_input = "что такое перцептрон?"
 
 def chatbot(user_input):
-    # Convert the question to a query vector
+    # Преобразование вопроса в вектор запроса
     query_vector = create_embeddings(user_input)
 
-    # Find the most similar documents
+    # Находим наиболее похожие документы
     distances, indices = nbrs.kneighbors([query_vector])
 
-    # add documents to query  to provide context
+    # Добавляем документы в запрос для предоставления контекста
     history = []
     for index in indices[0]:
         history.append(flattened_df['chunks'].iloc[index])
 
-    # combine the history and the user input
+    # Объединяем историю и ввод пользователя
     history.append(user_input)
 
-    # create a message object
+    # Создаем объект сообщения
     messages=[
-        {"role": "system", "content": "You are an AI assiatant that helps with AI questions."},
+        {"role": "system", "content": "Вы - виртуальный помощник, который помогает с вопросами по искусственному интеллекту."},
         {"role": "user", "content": history[-1]}
     ]
 
-    # use chat completion to generate a response
+    # Используем завершение чата для генерации ответа
     response = openai.chat.completions.create(
         model="gpt-4",
         temperature=0.7,
@@ -224,44 +224,44 @@ def chatbot(user_input):
 chatbot(user_input)
 ```
 
-## Evaluating our application
+## Оценка нашего приложения
 
-### Evaluation Metrics
+### Метрики оценки
 
-- Quality of responses supplied ensuring it sounds natural, fluent and human-like
+- Качество предоставляемых ответов, обеспечивая их естественность, свободное и гармоничное звучание, а также схожесть с человеческими высказываниями.
 
-- Groundedness of the data: evaluating whether the response that came from supplied docs
+- Прикрепление к данным: оценка того, насколько ответ основан на предоставленных документах.
 
-- Relevance: evaluating the response matches and is related to the question asked
+- Релевантность: оценка соответствия ответа и связи с заданным вопросом.
 
-- Fluency - whether the response makes sense grammatically
+- Грамматическая правильность: проверка того, имеет ли ответ грамматический смысл.
 
-## Use Cases for using RAG (Retervival Augmented Generation) and vector databases
+## Сферы применения использования RAG (Retrieval-Augmented Generation) и векторных баз данных
 
-There are many different use cases where function calls can improve your app like:
+Существует множество различных сфер применения, где функции вызовов могут улучшить ваше приложение, например:
 
-- Question and Answering: grounding your company data to a chat that can be used by employees to ask questions.
+- Вопросно-ответные системы: закрепление информации о компании в чате, который может использоваться сотрудниками для задавания вопросов.
 
-- Recommendation Systems: where you can create a system that matches the most similar values e.g. movies, restaurants and many more.
+- Системы рекомендаций: создание системы, которая находит наиболее схожие значения, например, фильмы, рестораны и многое другое.
 
-- Chatbot services: you can store chat history and personalize the conversation based on the user data.
+- Сервисы чатботов: хранение истории чата и персонализация беседы на основе данных пользователя.
 
-- Image search based on vector embeddings, useful when doing image recognition and anomaly detection.
+- Поиск изображений на основе векторных вложений, полезный при выполнении распознавания изображений и обнаружении аномалий.
 
-## Summary
+## Заключение
 
-We have covered the fundamental areas of RAG from adding our data to the application, the user query and output. To simplify creation of RAG, you can use frameworks such as Semanti Kernel, Langchain or Autogen.
+Мы рассмотрели основные аспекты RAG - от добавления данных в приложение до запросов пользователя и вывода результатов. Чтобы упростить создание RAG, вы можете использовать фреймворки, такие как Semanti Kernel, Langchain или Autogen.
 
-## Assignment
+## Задание
 
-To continue your learning of Retrieval Augmented Generation (RAG) you can build:
+Для продолжения изучения Retrieval Augmented Generation (RAG) вы можете выполнить следующие задачи:
 
-- Build a front-end for the application using the framework of your choice
+- Создать пользовательский интерфейс (фронтенд) для приложения, используя выбранный вами фреймворк.
 
-- Utilize a framework, either LangChain or Semantic Kernel, and recreate your application.
+- Использовать фреймворк LangChain или Semantic Kernel и воссоздать свое приложение.
 
-Congratulations for completing the lesson 👏.
+Поздравляю с завершением урока! 👏
 
-## Learning does not stop here, continue the Journey
+## Обучение не останавливается здесь, продолжайте свое путешествие
 
-After completing this lesson, check out our [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) to continue leveling up your Generative AI knowledge!
+После завершения этого урока ознакомьтесь с нашей [коллекцией обучающих материалов по генеративному искусственному интеллекту](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst), чтобы продолжить расширение своих знаний в области генеративного ИИ!
